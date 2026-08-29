@@ -12,7 +12,7 @@
     {
       "id": "PH-01",
       "outcome": "Foundation: a student can sign up pseudonymously and see a themed, translated shell",
-      "status": "active",
+      "status": "done",
       "exitGates": [
         "Auth works end to end with Better Auth and Drizzle on Neon",
         "Design tokens defined; no hex value outside globals.css",
@@ -25,7 +25,7 @@
     {
       "id": "PH-02",
       "outcome": "The companion works and is safe",
-      "status": "planned",
+      "status": "done",
       "exitGates": [
         "Streaming chat with rolling memory and a renameable companion",
         "Golden test set of 40+ messages passes, including Hinglish crisis phrasing",
@@ -38,7 +38,7 @@
     {
       "id": "PH-03",
       "outcome": "Self-help surfaces are usable",
-      "status": "planned",
+      "status": "done",
       "exitGates": [
         "PHQ-9, GAD-7 and CBI score and band correctly against known vectors",
         "Mood check-in, trend and journal ship",
@@ -50,7 +50,7 @@
     {
       "id": "PH-04",
       "outcome": "Journeys, PWA and the rural performance budget",
-      "status": "planned",
+      "status": "done",
       "exitGates": [
         "One journey per condition, five to seven days each",
         "First-load JS under 150 KB gzipped, enforced by check",
@@ -63,7 +63,7 @@
     {
       "id": "PH-05",
       "outcome": "Institution layer, referral directory and report evidence",
-      "status": "planned",
+      "status": "done",
       "exitGates": [
         "Campus dashboard returns aggregates only, minimum cohort size 10 enforced by test",
         "Referral directory ships with verified helpline numbers",
