@@ -1,4 +1,10 @@
-import { streamText, createUIMessageStream, createUIMessageStreamResponse } from "ai";
+import {
+  streamText,
+  convertToModelMessages,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  type UIMessage,
+} from "ai";
 import { model } from "@/ai/provider";
 import { buildSystemPrompt } from "@/ai/prompt";
 import { classifyRisk } from "@/safety/classifier";
@@ -12,8 +18,20 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
-    const lastUserMessage = messages.filter((m: {role: string, content: string}) => m.role === "user").pop();
+    const { messages }: { messages: UIMessage[] } = await req.json();
+
+    // useChat posts UI messages, whose text lives in parts — not in `content`.
+    // Reading `.content` here silently produced undefined, so classification saw
+    // nothing and the model was handed a shape it could not use.
+    const textOf = (m: UIMessage | undefined) =>
+      m?.parts
+        ?.filter((part): part is { type: "text"; text: string } => part.type === "text")
+        .map((part) => part.text)
+        .join(" ")
+        .trim() ?? "";
+
+    const lastUserMessage = messages.filter((m) => m.role === "user").pop();
+    const lastUserText = textOf(lastUserMessage);
 
     const session = await auth.api.getSession({
       headers: await headers()
@@ -30,11 +48,11 @@ export async function POST(req: Request) {
 
     let isDistress = false;
 
-    if (lastUserMessage) {
-      const risk = classifyRisk(lastUserMessage.content);
+    if (lastUserText) {
+      const risk = classifyRisk(lastUserText);
       
       if (risk.level === "crisis") {
-        await saveMessage(conversation.id, "user", lastUserMessage.content, "crisis");
+        await saveMessage(conversation.id, "user", lastUserText, "crisis");
         // The model is never called. This used to be a 400 whose body the client
         // had to find inside an error string; when that failed, a student in
         // crisis saw nothing at all. A data part is part of the protocol, so it
@@ -53,7 +71,7 @@ export async function POST(req: Request) {
         isDistress = true;
       }
 
-      await saveMessage(conversation.id, "user", lastUserMessage.content, risk.level);
+      await saveMessage(conversation.id, "user", lastUserText, risk.level);
     }
 
     const systemPrompt = buildSystemPrompt({
@@ -69,7 +87,7 @@ export async function POST(req: Request) {
     const result = streamText({
       model,
       system: systemPrompt,
-      messages,
+      messages: await convertToModelMessages(messages),
     });
 
     const generated = await result.text;
