@@ -4,6 +4,7 @@ Read one page for your task. Do not preload this set.
 
 | Need | Read |
 | --- | --- |
+| Current state, recent repairs, traps | [`../HANDOFF.md`](../HANDOFF.md) |
 | What we are building, scope in/out | [`product.md`](product.md) |
 | Evidence, citations, legal mandate | [`research.md`](research.md) |
 | Crisis handling, guardrails, escalation | [`safety.md`](safety.md) |

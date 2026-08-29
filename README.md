@@ -22,11 +22,13 @@ identify a student.
 
 Built for a budget Android on a 4G tower.
 
+**Live:** https://max-rudrakshm099-7145s-projects.vercel.app
+
 ## Start here
 
 | You are | Read |
 | --- | --- |
-| An agent picking up a task | [`AGENTS.md`](AGENTS.md), then your brief in [`briefs/`](briefs/) |
+| An agent picking up a task | [`HANDOFF.md`](HANDOFF.md), then [`AGENTS.md`](AGENTS.md) |
 | A teammate joining | [`docs/product.md`](docs/product.md) then [`docs/architecture.md`](docs/architecture.md) |
 | Writing the report | [`docs/research.md`](docs/research.md) — every citation lives there |
 | Touching anything near the model | [`docs/safety.md`](docs/safety.md), all of it |

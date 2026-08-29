@@ -61,6 +61,12 @@ our actual users.
 
 ## Escalation card
 
+The route answers a crisis with a `data-crisis` part on a normal UI message
+stream, and the client renders the card when it sees that part. This is
+deliberate: it used to be a 400 whose body the client searched for a string,
+that search failed, and a student in crisis was shown nothing at all. A protocol
+part always arrives; a parsed error message does not.
+
 Rendered from a fixed template. Not generated. Not paraphrased by a model.
 
 - Tele-MANAS — **14416** (24×7, Ministry of Health & Family Welfare)
@@ -85,8 +91,10 @@ After generation, before render, block or rewrite any reply that:
 - **fosters dependence** — "only I understand you", "you don't need anyone
   else". Washington HB 2225 names this pattern; we ban it regardless.
 
-A blocked reply is replaced by a reviewed fallback, and the event is logged
-with a reason and no message content.
+The reply is generated in full, inspected, and only then sent. A blocked reply
+is replaced by `GUARD_FALLBACK` before it reaches the browser, and the event is
+logged with a reason code and no message content. Guarding after the reply has
+streamed is recording a violation, not preventing one.
 
 ## Disclosure
 

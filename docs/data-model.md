@@ -45,7 +45,9 @@ Doing it inside a prompt template is not stripping — a later edit will undo it
 
 ## Retention and deletion
 
-- Export: the student downloads everything we hold, as JSON, on request.
+- Export: `GET /api/export` returns everything we hold as JSON — conversations
+  and messages included, not just journals and check-ins. If you add a table
+  that holds student data, add it there in the same change.
 - Delete: a hard delete of the user's rows, not a soft flag. `safetyEvent`
   rows are anonymised rather than kept — they carry no content anyway.
 - No analytics vendor, no third-party session recording, no advertising SDK.

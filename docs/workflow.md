@@ -19,11 +19,12 @@ The same loop for a human and for an agent.
    Playwright against the deployed app:
 
    ```bash
-   VERCEL_AUTOMATION_BYPASS_SECRET=<secret> npx playwright test
+   npx playwright test
    ```
 
-   The secret is the project's Vercel automation bypass, which lets the tests
-   through Deployment Protection without the site being public. Never commit it.
+   The deployment is public, so no secret is needed. If Deployment Protection is
+   turned back on, set `VERCEL_AUTOMATION_BYPASS_SECRET` from the Vercel project
+   settings; the config uses it automatically and it must never be committed.
    Add a case to the suite for any screen you change; a screen with no test is a
    screen nobody has checked. The in-app browser pane runs hidden and lies about
    computed styles, so it is not proof.

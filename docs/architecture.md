@@ -57,6 +57,13 @@ count, and never split cohesive content data or generated files.
 - No hex colours or arbitrary radii outside the token file
 - First-load JS stays within [`performance.md`](performance.md)
 
+## Deployment
+
+Live at **https://max-rudrakshm099-7145s-projects.vercel.app**, public. The
+build runs `next build` only — schema changes go through `npm run db:migrate`
+as a deliberate step, never automatically at deploy time. Neon's free tier has
+no automatic backups, so take a manual dump before a destructive migration.
+
 ## Environments
 
 One environment. `main` deploys to production on Vercel; preview deployments

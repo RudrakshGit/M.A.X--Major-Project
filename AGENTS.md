@@ -7,6 +7,8 @@ Read this file, then **one** `docs/` page for your task. Do not preload `docs/`.
 
 ## Start here
 
+0. Read `HANDOFF.md` first. It is the current state of the project and the
+   traps that will bite you. Update it in the same commit as your change.
 1. Your task comes from a brief in `briefs/`. It names the files, the schema and
    the acceptance check. Follow it; do not widen the scope.
 2. Current phase and queue: `project/state.json`. Read it only when planning.
