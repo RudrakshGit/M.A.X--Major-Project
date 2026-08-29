@@ -1,0 +1,13 @@
+{
+  "name": "max",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "bounded": "node scripts/bounded-run.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

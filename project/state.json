@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-29",
+  "project": {
+    "name": "MAX",
+    "expansion": "Mental-health Access & eXpression",
+    "group": "E-G18",
+    "guide": "Mr. Devendra Kuril",
+    "title": "Development of a Digital Mental Health and Psychological Support System for Students in Higher Education"
+  },
+  "phases": [
+    {
+      "id": "PH-01",
+      "outcome": "Foundation: a student can sign up pseudonymously and see a themed, translated shell",
+      "status": "active",
+      "exitGates": [
+        "Auth works end to end with Better Auth and Drizzle on Neon",
+        "Design tokens defined; no hex value outside globals.css",
+        "Hindi and English both render, including Devanagari headings",
+        "npm run check passes with a real exit code"
+      ],
+      "activePlan": null,
+      "evidence": []
+    },
+    {
+      "id": "PH-02",
+      "outcome": "The companion works and is safe",
+      "status": "planned",
+      "exitGates": [
+        "Streaming chat with rolling memory and a renameable companion",
+        "Golden test set of 40+ messages passes, including Hinglish crisis phrasing",
+        "Crisis path renders the helpline card without calling the model",
+        "Output guard blocks diagnosis, medication and dependence patterns"
+      ],
+      "activePlan": null,
+      "evidence": []
+    },
+    {
+      "id": "PH-03",
+      "outcome": "Self-help surfaces are usable",
+      "status": "planned",
+      "exitGates": [
+        "PHQ-9, GAD-7 and CBI score and band correctly against known vectors",
+        "Mood check-in, trend and journal ship",
+        "Resource library covers all six named conditions in both languages"
+      ],
+      "activePlan": null,
+      "evidence": []
+    },
+    {
+      "id": "PH-04",
+      "outcome": "Journeys, PWA and the rural performance budget",
+      "status": "planned",
+      "exitGates": [
+        "One journey per condition, five to seven days each",
+        "First-load JS under 150 KB gzipped, enforced by check",
+        "Offline shell serves resources, journeys and past journal entries",
+        "Lighthouse mobile run recorded in plans/completed/"
+      ],
+      "activePlan": null,
+      "evidence": []
+    },
+    {
+      "id": "PH-05",
+      "outcome": "Institution layer, referral directory and report evidence",
+      "status": "planned",
+      "exitGates": [
+        "Campus dashboard returns aggregates only, minimum cohort size 10 enforced by test",
+        "Referral directory ships with verified helpline numbers",
+        "Data export and hard delete work",
+        "Screenshots and metrics collected for the report"
+      ],
+      "activePlan": null,
+      "evidence": []
+    }
+  ],
+  "todo": [
+    {
+      "id": "TODO-001",
+      "title": "Scaffold the Next.js application inside the harness",
+      "status": "ready",
+      "priority": "P0",
+      "phase": "PH-01",
+      "acceptance": [
+        "App builds and runs locally",
+        "Tailwind tokens file exists and is the only place hex values appear",
+        "npm run check runs lint, typecheck, test and the bundle budget"
+      ],
+      "nextAction": "Write briefs/001-scaffold-app.md, then dispatch it",
+      "plan": null
+    },
+    {
+      "id": "TODO-002",
+      "title": "Stand up the safety module and its golden test set",
+      "status": "ready",
+      "priority": "P0",
+      "phase": "PH-02",
+      "acceptance": [
+        "classifyRisk covers English, Hindi and romanised Hinglish deterministically",
+        "Model pass failure falls back to the deterministic result, never open",
+        "40+ labelled cases including hard negatives that must not escalate"
+      ],
+      "nextAction": "Author the golden set before any model wiring",
+      "plan": null
+    }
+  ],
+  "intents": [
+    {
+      "id": "INT-001",
+      "originalLanguage": "hinglish",
+      "original": "ye ek college major project hai toh over engineered nahi hona chahiye kuch",
+      "summary": "Prefer the smallest thing that works and demos well; reject speculative architecture.",
+      "status": "accepted",
+      "source": "owner:2026-08-29",
+      "acceptance": [
+        "No MCP layer, no microservices, no separate REST API alongside Server Actions"
+      ],
+      "questions": []
+    },
+    {
+      "id": "INT-002",
+      "originalLanguage": "hinglish",
+      "original": "Development aur deployment free hona chahiye",
+      "summary": "Every tool and hosting tier must be free and require no credit card.",
+      "status": "accepted",
+      "source": "owner:2026-08-29",
+      "acceptance": [
+        "Vercel Hobby, Neon free, Groq free, Better Auth self-hosted"
+      ],
+      "questions": []
+    },
+    {
+      "id": "INT-003",
+      "originalLanguage": "english",
+      "original": "warm, youth-focused mental-health platform with a clean, friendly, editorial UI",
+      "summary": "Warm pastel editorial design in the spirit of most.org.au; never clinical, never a generic SaaS template.",
+      "status": "accepted",
+      "source": "owner:2026-08-29",
+      "acceptance": [
+        "No purple gradients, glassmorphism or generic feature-card grids"
+      ],
+      "questions": []
+    },
+    {
+      "id": "INT-004",
+      "originalLanguage": "hinglish",
+      "original": "Apne apne chatbot ka name change karne ki freedom de skte hai",
+      "summary": "The student renames the companion; MAX is only the default name.",
+      "status": "accepted",
+      "source": "owner:2026-08-29",
+      "acceptance": [
+        "Companion name and tone are set at onboarding and editable later"
+      ],
+      "questions": []
+    },
+    {
+      "id": "INT-005",
+      "originalLanguage": "hinglish",
+      "original": "Me chote models se development karunga toh unka kaam tumhe asaan karna hai",
+      "summary": "Small models implement from briefs; planning and judgement happen before the brief is written.",
+      "status": "accepted",
+      "source": "owner:2026-08-29",
+      "acceptance": [
+        "Every brief names exact files, the full Zod schema, acceptance and a verify command"
+      ],
+      "questions": []
+    },
+    {
+      "id": "INT-006",
+      "originalLanguage": "english",
+      "original": "especially in rural and semi-urban colleges",
+      "summary": "Low bandwidth, budget Android and Hindi are graded requirements, not nice-to-haves.",
+      "status": "accepted",
+      "source": "problem-statement:E-G18",
+      "acceptance": [
+        "Performance budget enforced in CI",
+        "Hindi ships with every user-facing string"
+      ],
+      "questions": []
+    }
+  ]
+}
