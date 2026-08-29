@@ -60,9 +60,15 @@ export async function POST(req: Request) {
       messages,
       onFinish: async ({ text }) => {
         if (!guardOutput(text)) {
-          console.warn("Safety violation: Output guard blocked response.", text);
-          // In a buffered implementation, we would replace the text.
-          // Since it's streaming, we log the violation to audit later.
+          // The reply has already streamed to the client by this point, so this
+          // records the violation rather than preventing it. See brief 015 —
+          // docs/safety.md requires a blocked reply to be replaced, which needs
+          // buffering. Never log the message body: safety records carry reason
+          // codes only.
+          console.warn(JSON.stringify({
+            event: "safety.output_guard.violation",
+            conversationId: conversation.id,
+          }));
         }
         
         await saveMessage(conversation.id, "assistant", text);

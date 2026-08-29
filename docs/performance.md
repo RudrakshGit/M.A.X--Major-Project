@@ -29,6 +29,7 @@ evidence behind each number is in [`research.md`](research.md) §5.
 
 ## Verification
 
-`npm run check` fails the build if first-load JS exceeds the budget. Record a
+`npm run check` does **not** yet enforce the JS budget — brief 015 adds it.
+Until then the number above is a target, not a gate. Record a
 Lighthouse run on mobile throttling in `plans/completed/` at each phase gate —
 that trend is a report figure, not a chore.
