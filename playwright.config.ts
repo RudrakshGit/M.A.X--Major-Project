@@ -21,6 +21,11 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   projects: [
-    { name: "mobile", use: { ...devices["Pixel 7"] } },
+    { name: "setup", testMatch: /auth\.setup\.ts/, use: { ...devices["Pixel 7"] } },
+    {
+      name: "mobile",
+      use: { ...devices["Pixel 7"], storageState: "e2e/.auth/student.json" },
+      dependencies: ["setup"],
+    },
   ],
 });

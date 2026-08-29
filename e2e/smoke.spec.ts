@@ -1,25 +1,13 @@
-import { test, expect, Page } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 
-const PASSWORD = "TestPassword123!";
-let counter = 0;
-const username = () => `e2e${Date.now().toString(36)}${counter++}`;
-
-async function signUp(page: Page) {
-  await page.goto("/sign-up");
-  await page.getByLabel("Username").fill(username());
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: /sign up/i }).click();
-  await expect(page).toHaveURL(/\/$|\/(?!sign)/, { timeout: 30_000 });
-  await expect(page.getByPlaceholder(/message max/i)).toBeVisible({ timeout: 30_000 });
-}
-
-test("a student can sign up and land in the chat", async ({ page }) => {
-  await signUp(page);
+test("a signed-in student lands in the chat", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByPlaceholder(/message max/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /urgent help/i })).toBeVisible();
 });
 
 test("every section is reachable from the navigation", async ({ page }) => {
-  await signUp(page);
+  await page.goto("/");
   for (const label of ["Journal", "Check in", "Read", "Journeys"]) {
     await page.getByRole("link", { name: label, exact: true }).click();
     await expect(page.locator("main")).not.toBeEmpty();
@@ -30,7 +18,7 @@ test("every section is reachable from the navigation", async ({ page }) => {
 });
 
 test("urgent help is reachable from any screen and lists the helplines", async ({ page }) => {
-  await signUp(page);
+  await page.goto("/");
   await page.getByRole("link", { name: "Journeys", exact: true }).click();
   await page.getByRole("link", { name: /urgent help/i }).click();
   await expect(page.getByText("14416")).toBeVisible({ timeout: 20_000 });
@@ -38,7 +26,7 @@ test("urgent help is reachable from any screen and lists the helplines", async (
 });
 
 test("the companion replies to an ordinary message", async ({ page }) => {
-  await signUp(page);
+  await page.goto("/");
   const box = page.getByPlaceholder(/message max/i);
   await box.fill("hi, feeling stressed about exams");
   await page.keyboard.press("Enter");
@@ -48,7 +36,7 @@ test("the companion replies to an ordinary message", async ({ page }) => {
 });
 
 test("a Hinglish crisis message shows the helpline card, not a reply", async ({ page }) => {
-  await signUp(page);
+  await page.goto("/");
   const box = page.getByPlaceholder(/message max/i);
   await box.fill("jeene ka mann nahi kar raha");
   await page.keyboard.press("Enter");
@@ -58,7 +46,7 @@ test("a Hinglish crisis message shows the helpline card, not a reply", async ({ 
 });
 
 test("a screener scores and shows a band", async ({ page }) => {
-  await signUp(page);
+  await page.goto("/");
   await page.goto("/assessments/gad7");
   const groups = page.getByRole("radiogroup");
   await expect(groups.first()).toBeVisible({ timeout: 20_000 });
@@ -73,7 +61,7 @@ test("a screener scores and shows a band", async ({ page }) => {
 });
 
 test("the campus dashboard refuses to show a small cohort", async ({ page }) => {
-  await signUp(page);
+  await page.goto("/");
   const response = await page.goto("/campus");
   expect(response?.status()).toBeLessThan(500);
   // A fresh student is not an admin, so the dashboard must refuse outright.
@@ -81,4 +69,29 @@ test("the campus dashboard refuses to show a small cohort", async ({ page }) => 
     /access restricted|administrator permissions|not enough data|minimum/i,
     { timeout: 20_000 },
   );
+});
+
+// Runs last on purpose: it destroys the shared session account, which also
+// keeps the test database from accumulating accounts run after run.
+test("a student can export their data and delete their account", async ({ page }) => {
+  await page.goto("/settings");
+
+  // Assert the export contract rather than the browser's download plumbing:
+  // the request carries the signed-in session from storageState.
+  const response = await page.request.get("/api/export");
+  expect(response.status()).toBe(200);
+  expect(response.headers()["content-disposition"]).toContain("max-data-export");
+  const body = await response.json();
+  // docs/data-model.md promises everything, conversations included.
+  expect(Object.keys(body.data)).toEqual(
+    expect.arrayContaining(["conversations", "messages", "journals", "screeners", "moods"]),
+  );
+
+  await expect(page.getByRole("link", { name: /export my data/i })).toBeVisible();
+
+  await page.getByRole("button", { name: /delete my account/i }).click();
+  await page.getByRole("button", { name: /yes, delete everything/i }).click();
+
+  // Deleting ends the session, so the app must send them back to sign-in.
+  await expect(page).toHaveURL(/sign-in/, { timeout: 30_000 });
 });
