@@ -53,7 +53,9 @@ Two layers, cheapest first:
 If the model pass errors or times out, **fall back to the deterministic
 result**. Never fail open into a normal reply.
 
-Romanised Hindi is not optional. "mann nahi lag raha", "jeene ka mann nahi",
+**The interface being English does not make this optional.** A student in
+distress writes in the language they think in, whatever language the buttons
+are in. Romanised Hindi is not optional. "mann nahi lag raha", "jeene ka mann nahi",
 "khatam kar dunga" must be covered. English-only detection would fail most of
 our actual users.
 

@@ -18,7 +18,7 @@ evidence and not assumption.
 | Gap in the problem statement | Our answer |
 | --- | --- |
 | Availability | A companion at 3 a.m. No appointment, no waitlist, no queue |
-| Accessibility | Hindi and English, low-bandwidth PWA, budget Android first |
+| Accessibility | Low-bandwidth PWA, budget Android first, nothing to install |
 | Stigma-free delivery | Pseudonymous by default. The college never sees a name |
 
 ## The six conditions we cover
@@ -42,7 +42,7 @@ the owner's decision, and do not quietly drop one.
 8. Journal, free and prompted, with "talk to MAX about this"
 9. **Referral directory** — helplines and external services, because the
    Supreme Court requires small institutions to hold formal referral linkages
-10. Hindi and English, PWA, within the budget in [`performance.md`](performance.md)
+10. PWA, within the budget in [`performance.md`](performance.md)
 11. Anonymous aggregate campus dashboard for the institution role
 
 ## Stretch, only after core is verified

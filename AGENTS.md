@@ -40,7 +40,8 @@ Read this file, then **one** `docs/` page for your task. Do not preload `docs/`.
 - Tailwind tokens only — no hex values, no arbitrary radii, no new palette.
 - UI proof is headless Playwright. The in-app browser pane is unreliable here.
 - Conventional Commits. One PR owns one concern.
-- Hindi and English ship together. A string without a translation key is a bug.
+- The interface is English only. The safety classifier still handles Hindi and
+  Hinglish input — those patterns are load-bearing, not dead code.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

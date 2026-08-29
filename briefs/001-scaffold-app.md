@@ -1,14 +1,14 @@
 # 001 — Scaffold the Next.js application
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-01
 - **Branch:** `feat/scaffold-app`
 - **Read before starting:** `docs/architecture.md`
 
 ## Outcome
 
-`npm run dev` serves a themed, bilingual empty shell, and `npm run check`
-passes with exit code 0.
+`npm run dev` serves a themed empty shell, and `npm run check` passes with
+exit code 0.
 
 ## Files
 
@@ -20,9 +20,6 @@ passes with exit code 0.
 | `src/app/layout.tsx` | create |
 | `src/app/page.tsx` | create |
 | `src/app/globals.css` | create — the only file with colour values |
-| `src/i18n/messages.en.json` | create |
-| `src/i18n/messages.hi.json` | create |
-| `src/i18n/request.ts` | create |
 | `src/env.ts` | create |
 | `.env.example` | update |
 | `THIRD-PARTY.md` | create — every dependency, its licence and its purpose |
@@ -48,24 +45,19 @@ export const env = serverSchema.parse(process.env);
 ## Steps
 
 1. Initialise Next.js with the App Router, TypeScript and Tailwind.
-2. Install: `next-intl`, `zod`, `drizzle-orm`, `@neondatabase/serverless`,
+2. Install: `zod`, `drizzle-orm`, `@neondatabase/serverless`,
    `better-auth`, `ai`, `@ai-sdk/groq`. Dev: `drizzle-kit`, `vitest`,
    `@playwright/test`, `eslint`, `prettier`.
 3. Define tokens in `globals.css` under `@theme` — warm off-white surface, warm
    near-black ink, five muted pastel accents, one restrained signal colour, two
    radii, two shadows. Read `docs/design-system.md` for the intent.
-4. Wire `next-intl` with `en` and `hi`. The home page renders one translated
-   heading and one translated paragraph from the message files.
-5. Pick heading and body faces that both carry Devanagari. Verify the Hindi
-   heading renders before moving on.
-6. Add scripts: `dev`, `build`, `lint`, `typecheck`, `test`, `check`.
+4. Add scripts: `dev`, `build`, `lint`, `typecheck`, `test`, `check`.
    `check` runs lint, typecheck and test in sequence and exits non-zero on any
    failure.
 
 ## Acceptance
 
 - [ ] `npm run dev` serves the page at `/` with no console errors
-- [ ] `/hi` renders Devanagari correctly, with no tofu boxes
 - [ ] `src/app/globals.css` is the only file containing a colour value —
       `grep -rE "#[0-9a-fA-F]{3,8}" src --include=*.tsx` returns nothing
 - [ ] `npm run check` exits 0

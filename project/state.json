@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29",
+  "updatedAt": "2026-08-30",
   "project": {
     "name": "MAX",
     "expansion": "Mental-health Access & eXpression",
@@ -16,7 +16,6 @@
       "exitGates": [
         "Auth works end to end with Better Auth and Drizzle on Neon",
         "Design tokens defined; no hex value outside globals.css",
-        "Hindi and English both render, including Devanagari headings",
         "npm run check passes with a real exit code"
       ],
       "activePlan": null,
@@ -169,12 +168,25 @@
       "id": "INT-006",
       "originalLanguage": "english",
       "original": "especially in rural and semi-urban colleges",
-      "summary": "Low bandwidth, budget Android and Hindi are graded requirements, not nice-to-haves.",
+      "summary": "Low bandwidth and budget Android are graded requirements. Hindi UI was dropped by the owner on 2026-08-30; Hinglish input detection in the safety layer stays.",
       "status": "accepted",
       "source": "problem-statement:E-G18",
       "acceptance": [
         "Performance budget enforced in CI",
-        "Hindi ships with every user-facing string"
+        "Safety classifier covers Hindi and romanised Hinglish input"
+      ],
+      "questions": []
+    },
+    {
+      "id": "INT-007",
+      "originalLanguage": "hinglish",
+      "original": "Hindi + English drop kr diya tha sirf english rahega",
+      "summary": "The interface ships in English only. Bilingual UI is out of scope.",
+      "status": "accepted",
+      "source": "owner:2026-08-30",
+      "acceptance": [
+        "No i18n framework in the dependency tree",
+        "Safety classifier still detects Hindi and Hinglish crisis input"
       ],
       "questions": []
     }

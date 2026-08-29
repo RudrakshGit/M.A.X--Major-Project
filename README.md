@@ -20,7 +20,7 @@ sleep, academic stress and social isolation. Behind it: a referral directory,
 and an anonymous aggregate dashboard for the institution that can never
 identify a student.
 
-Hindi and English. Built for a budget Android on a 4G tower.
+Built for a budget Android on a 4G tower.
 
 ## Start here
 
@@ -50,7 +50,7 @@ only status plus a short tail.
 ## Stack
 
 Next.js · Tailwind · shadcn/ui · Drizzle · Neon Postgres · Better Auth ·
-Vercel AI SDK on Groq · next-intl · Playwright · Vercel Hobby (`bom1`).
+Vercel AI SDK on Groq · Playwright · Vercel Hobby (`bom1`).
 
 Every tier is free and needs no credit card.
 
@@ -60,4 +60,4 @@ Every tier is free and needs no credit card.
 2. No diagnosis, no medication advice, no crisis counselling from the AI.
 3. An institution sees aggregates only, with a minimum cohort size.
 4. No personal data ever reaches a model provider.
-5. Hindi ships with every string, and the performance budget is a requirement.
+5. The interface is English, but the safety classifier must still read Hinglish.

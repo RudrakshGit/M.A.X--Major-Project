@@ -41,8 +41,6 @@ Dark mode ships in Phase 3, driven by the same tokens.
 - One display face for headings, set large and confident, with tight leading.
 - System stack for body text — free, instant, and already on the device.
 - Comfortable body size, generous line height. This is reading, not scanning.
-- Both faces must carry **Devanagari**, or Hindi will fall back and look broken.
-  Check this before choosing, not after.
 
 ## Components
 
@@ -59,8 +57,8 @@ yet" is a chance to invite the first one.
 - Short sentences. Plain words.
 - Never congratulate a student for suffering, never call anything a "journey to
   wellness", never use "just" ("just try breathing").
-- Hindi is a translation of meaning, not of words. Stiff, literal Hindi reads
-  as bureaucratic — the exact opposite of stigma-free.
+- Students write to MAX in Hinglish. Never correct their language, and never
+  answer in a register stiffer than the one they used.
 
 ## Accessibility
 

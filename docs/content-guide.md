@@ -45,9 +45,8 @@ break. All CBT or CBT-I derived and freely describable.
 - Never imply effort is the missing ingredient.
 - No streaks, no badges, no "you broke your chain". Gamified guilt is harmful
   in this domain and we do not ship it.
-- Hindi is written natively, not translated word for word.
 
 ## Checklist before content ships
 
-Source cited · both languages present · reading time under the cap · routes to
+Source cited · reading time under the cap · routes to
 a human at the end · no diagnosis language · no copyrighted instrument.

@@ -61,7 +61,6 @@ Full feature list: [Eleanor Health — 10 best apps for mental health](https://w
 | [better-auth/better-auth](https://github.com/better-auth/better-auth) | MIT | Auth, with the Drizzle adapter |
 | [drizzle-team/drizzle-orm](https://github.com/drizzle-team/drizzle-orm) | Apache-2.0 | ORM and migrations |
 | [colinhacks/zod](https://github.com/colinhacks/zod) | MIT | Every contract in this project |
-| [amannn/next-intl](https://github.com/amannn/next-intl) | MIT | Hindi and English routing |
 | [serwist/serwist](https://github.com/serwist/serwist) | MIT | PWA service worker and offline shell |
 | [recharts/recharts](https://github.com/recharts/recharts) | MIT | Mood trend and campus dashboard charts. Load only on those routes |
 | [microsoft/playwright](https://github.com/microsoft/playwright) | Apache-2.0 | Headless UI verification |
