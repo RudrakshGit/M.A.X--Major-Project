@@ -35,10 +35,18 @@ export async function POST(req: Request) {
       
       if (risk.level === "crisis") {
         await saveMessage(conversation.id, "user", lastUserMessage.content, "crisis");
-        return new Response(
-          JSON.stringify({ error: "crisis_detected" }),
-          { status: 400, headers: { 'Content-Type': 'application/json' } }
-        );
+        // The model is never called. This used to be a 400 whose body the client
+        // had to find inside an error string; when that failed, a student in
+        // crisis saw nothing at all. A data part is part of the protocol, so it
+        // always arrives.
+        const crisisStream = createUIMessageStream({
+          execute: ({ writer }) => {
+            writer.write({ type: "start" });
+            writer.write({ type: "data-crisis", data: { reason: risk.reason ?? "crisis" } });
+            writer.write({ type: "finish" });
+          },
+        });
+        return createUIMessageStreamResponse({ stream: crisisStream });
       }
       
       if (risk.level === "distress") {
@@ -88,9 +96,15 @@ export async function POST(req: Request) {
     const stream = createUIMessageStream({
       execute: ({ writer }) => {
         const id = "reply";
+        // start/finish frame the assistant message. Without them useChat never
+        // creates the message, so the text parts arrive with nowhere to render.
+        writer.write({ type: "start" });
+        writer.write({ type: "start-step" });
         writer.write({ type: "text-start", id });
         writer.write({ type: "text-delta", id, delta: reply });
         writer.write({ type: "text-end", id });
+        writer.write({ type: "finish-step" });
+        writer.write({ type: "finish" });
       },
     });
 

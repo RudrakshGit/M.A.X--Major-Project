@@ -60,11 +60,14 @@ test("a Hinglish crisis message shows the helpline card, not a reply", async ({ 
 test("a screener scores and shows a band", async ({ page }) => {
   await signUp(page);
   await page.goto("/assessments/gad7");
-  const radios = page.getByRole("radio");
-  await expect(radios.first()).toBeVisible({ timeout: 20_000 });
-  const count = await radios.count();
-  // Answer every question with the first option.
-  for (let i = 0; i < count; i += 4) await radios.nth(i).check();
+  const groups = page.getByRole("radiogroup");
+  await expect(groups.first()).toBeVisible({ timeout: 20_000 });
+  const questions = await groups.count();
+  expect(questions).toBeGreaterThan(0);
+  // Answer every question the way a student would: click the option label.
+  for (let i = 0; i < questions; i++) {
+    await groups.nth(i).getByText("Not at all", { exact: true }).first().click();
+  }
   await page.getByRole("button", { name: /submit|finish|see result/i }).click();
   await expect(page.locator("main")).toContainText(/minimal|mild|moderate|severe/i, { timeout: 20_000 });
 });
@@ -73,6 +76,9 @@ test("the campus dashboard refuses to show a small cohort", async ({ page }) => 
   await signUp(page);
   const response = await page.goto("/campus");
   expect(response?.status()).toBeLessThan(500);
-  // A fresh student is not an admin, and the cohort is under 10 either way.
-  await expect(page.locator("body")).toContainText(/not enough data|unauthorized|privacy|minimum/i, { timeout: 20_000 });
+  // A fresh student is not an admin, so the dashboard must refuse outright.
+  await expect(page.locator("body")).toContainText(
+    /access restricted|administrator permissions|not enough data|minimum/i,
+    { timeout: 20_000 },
+  );
 });

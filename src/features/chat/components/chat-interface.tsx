@@ -32,7 +32,11 @@ export function ChatInterface({ initialMessages = [] }: { initialMessages?: UIMe
     }
   }, [messages, status, error]);
 
-  const hasCrisisError = error && error.message.includes("crisis_detected");
+  const hasCrisisError = messages.some((m) =>
+    (m as unknown as { parts?: Array<{ type: string }> }).parts?.some(
+      (part) => part.type === "data-crisis",
+    ),
+  );
   const isGenerating = status === "submitted" || status === "streaming";
 
   return (
