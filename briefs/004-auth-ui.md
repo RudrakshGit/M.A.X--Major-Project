@@ -1,6 +1,6 @@
 # 004 — Auth UI & Pseudonymous Sign Up
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-01
 - **Branch:** `feat/auth-ui`
 - **Read before starting:** `docs/design-system.md`

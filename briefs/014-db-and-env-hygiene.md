@@ -1,6 +1,6 @@
 # 014 — Real migrations, and make env validation actually run
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-01
 - **Branch:** `fix/db-env-hygiene`
 - **Read before starting:** `docs/architecture.md`

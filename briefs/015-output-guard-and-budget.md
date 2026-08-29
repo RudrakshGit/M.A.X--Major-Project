@@ -1,6 +1,6 @@
 # 015 — Make the output guard actually block, and enforce the bundle budget
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-02
 - **Branch:** `fix/output-guard`
 - **Read before starting:** `docs/safety.md`

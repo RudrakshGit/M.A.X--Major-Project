@@ -1,6 +1,6 @@
 # 009 — Resource Library
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-03
 - **Branch:** `feat/resource-library`
 - **Read before starting:** `project/state.json`

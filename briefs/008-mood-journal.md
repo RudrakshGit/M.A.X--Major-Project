@@ -1,6 +1,6 @@
 # 008 — Mood Check-ins & Journaling
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-03
 - **Branch:** `feat/mood-journal`
 - **Read before starting:** `project/state.json`

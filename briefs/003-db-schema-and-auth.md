@@ -1,6 +1,6 @@
 # 003 — Database Schema & Better Auth on Neon
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-01
 - **Branch:** `feat/db-auth`
 - **Read before starting:** `docs/data-model.md`, `docs/architecture.md`

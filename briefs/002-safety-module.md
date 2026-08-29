@@ -1,6 +1,6 @@
 # 002 — Stand up the safety module and its golden test set
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-02
 - **Branch:** `feat/safety-module`
 - **Read before starting:** `docs/safety.md`

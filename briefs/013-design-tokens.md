@@ -1,6 +1,6 @@
 # 013 — Move colour into tokens
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-04
 - **Branch:** `fix/design-tokens`
 - **Read before starting:** `docs/design-system.md`

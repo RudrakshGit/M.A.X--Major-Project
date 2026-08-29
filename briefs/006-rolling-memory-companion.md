@@ -1,6 +1,6 @@
 # 006 — Chat Persistence & Rolling Memory
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-02
 - **Branch:** `feat/rolling-memory-companion`
 - **Read before starting:** `docs/ai.md`, `project/state.json`

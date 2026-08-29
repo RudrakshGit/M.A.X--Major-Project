@@ -1,6 +1,6 @@
 # 011 — PWA Offline Shell & Performance
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-04
 - **Branch:** `feat/pwa-performance`
 - **Read before starting:** `project/state.json`

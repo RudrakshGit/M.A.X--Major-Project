@@ -1,6 +1,6 @@
 # 005 — AI Chat Wiring & UI
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-02
 - **Branch:** `feat/chat-companion`
 - **Read before starting:** `docs/ai.md`, `docs/safety.md`

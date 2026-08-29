@@ -1,6 +1,6 @@
 # 007 — Clinical Screeners
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-03
 - **Branch:** `feat/clinical-screeners`
 - **Read before starting:** `project/state.json`

@@ -1,6 +1,6 @@
 # 010 — Structured Self-help Journeys
 
-- **Status:** ready
+- **Status:** merged
 - **Phase:** PH-04
 - **Branch:** `feat/journeys`
 - **Read before starting:** `project/state.json`

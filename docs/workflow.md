@@ -15,9 +15,18 @@ The same loop for a human and for an agent.
    do not fix it in this branch.
 6. **Verify.** `npm run check`. Paste the **real exit code**. A summary is not
    evidence. If it fails, fix it — never weaken a test to make it pass.
-7. **Prove the UI** when you changed one: a headless Playwright screenshot into
-   `evidence/`. The in-app browser pane runs hidden and lies about computed
-   styles.
+7. **Prove the UI** when you changed one. `e2e/smoke.spec.ts` runs headless
+   Playwright against the deployed app:
+
+   ```bash
+   VERCEL_AUTOMATION_BYPASS_SECRET=<secret> npx playwright test
+   ```
+
+   The secret is the project's Vercel automation bypass, which lets the tests
+   through Deployment Protection without the site being public. Never commit it.
+   Add a case to the suite for any screen you change; a screen with no test is a
+   screen nobody has checked. The in-app browser pane runs hidden and lies about
+   computed styles, so it is not proof.
 8. **PR.** Conventional Commit title, one concern, the template filled in.
 9. **Update state** only if a phase gate or a durable decision moved.
 
