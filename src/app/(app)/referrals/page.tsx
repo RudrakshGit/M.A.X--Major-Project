@@ -11,7 +11,7 @@ export default function ReferralsPage() {
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
       <div className="max-w-4xl mx-auto space-y-12">
         <div className="space-y-4">
-          <div className="inline-flex items-center rounded-full border border-red-600/20 bg-red-50 px-2.5 py-0.5 text-xs font-semibold text-red-700 mb-2">
+          <div className="inline-flex items-center rounded-full border border-signal/30 bg-signal/10 px-2.5 py-0.5 text-xs font-semibold text-signal mb-2">
             <AlertTriangle className="w-4 h-4 mr-1.5" /> If you are in immediate danger, please call 112
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold text-ink">
@@ -32,7 +32,7 @@ export default function ReferralsPage() {
                 <h3 className="text-xl font-bold font-display text-ink">
                   {helpline.name}
                 </h3>
-                <div className="inline-flex items-center bg-green-50 text-green-700 text-xs font-bold px-2 py-1 rounded">
+                <div className="inline-flex items-center bg-success/10 text-success text-xs font-bold px-2 py-1 rounded">
                   <ShieldCheck className="w-3 h-3 mr-1" /> Verified
                 </div>
               </div>

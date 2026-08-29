@@ -67,7 +67,7 @@ export function JourneyDayView({
         disabled={isCompleted || isSubmitting}
         className={`w-full sm:w-auto rounded-full px-8 py-6 text-base ${
           isCompleted 
-            ? "bg-green-600/10 text-green-700 hover:bg-green-600/10 opacity-100" 
+            ? "bg-success/10 text-success hover:bg-success/10 opacity-100" 
             : "bg-ink hover:bg-ink/90 text-surface"
         }`}
       >

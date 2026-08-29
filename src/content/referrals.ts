@@ -9,6 +9,15 @@ export type Helpline = {
 
 export const helplines: Helpline[] = [
   {
+    id: "telemanas",
+    name: "Tele-MANAS",
+    description:
+      "The Government of India's national mental health helpline, run by the Ministry of Health and Family Welfare.",
+    number: "14416",
+    hours: "24/7",
+    tags: ["Government", "Crisis", "Multilingual"],
+  },
+  {
     id: "vandrevala",
     name: "Vandrevala Foundation",
     description: "Crisis intervention and mental health support for anyone experiencing distress.",

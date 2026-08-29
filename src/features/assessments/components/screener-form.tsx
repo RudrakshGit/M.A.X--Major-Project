@@ -81,7 +81,7 @@ export function ScreenerForm({ screener }: { screener: Screener }) {
       </div>
 
       {error && (
-        <div className="p-4 bg-red-50 text-red-700 rounded-lg flex items-center gap-3">
+        <div className="p-4 bg-signal/10 text-signal rounded-lg flex items-center gap-3">
           <AlertCircle className="w-5 h-5" />
           <p className="text-sm font-medium">{error}</p>
         </div>

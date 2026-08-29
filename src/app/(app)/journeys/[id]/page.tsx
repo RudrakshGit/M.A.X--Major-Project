@@ -81,7 +81,7 @@ export default async function JourneyDetailPage({ params }: { params: Promise<{ 
                     <div key={day.day} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                       <div className="flex items-center justify-center w-6 h-6 rounded-full border-2 border-surface bg-surface shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         {isPast ? (
-                          <CheckCircle2 className="w-5 h-5 text-green-600 bg-surface rounded-full" />
+                          <CheckCircle2 className="w-5 h-5 text-success bg-surface rounded-full" />
                         ) : isActive ? (
                           <div className="w-2.5 h-2.5 bg-ink rounded-full" />
                         ) : (
@@ -111,8 +111,8 @@ export default async function JourneyDetailPage({ params }: { params: Promise<{ 
             <div className="md:col-span-8">
               {isCompleted ? (
                 <div className="bg-surface rounded-2xl p-12 shadow-sm border border-ink/5 text-center space-y-6">
-                  <div className="mx-auto w-20 h-20 bg-green-600/10 rounded-full flex items-center justify-center mb-6">
-                    <CheckCircle2 className="w-10 h-10 text-green-600" />
+                  <div className="mx-auto w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mb-6">
+                    <CheckCircle2 className="w-10 h-10 text-success" />
                   </div>
                   <h2 className="text-3xl font-display font-bold text-ink">Journey Complete!</h2>
                   <p className="text-ink/70 text-lg">

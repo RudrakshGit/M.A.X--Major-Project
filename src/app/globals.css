@@ -23,6 +23,9 @@
   /* Signal — urgent help, findable but not alarming */
   --color-signal: #c27650;           /* warm amber-terracotta */
 
+  /* Success — a step finished. Muted so it congratulates without shouting. */
+  --color-success: #6f8265;          /* deeper sage, readable on surface */
+
   /* Radii */
   --radius-sm: 0.5rem;
   --radius-lg: 1rem;

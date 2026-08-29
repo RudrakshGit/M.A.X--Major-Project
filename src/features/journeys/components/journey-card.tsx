@@ -25,7 +25,7 @@ export function JourneyCard({
       <div className="h-full bg-surface p-6 rounded-2xl border border-ink/5 hover:border-ink/20 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 relative overflow-hidden">
         
         {isCompleted && (
-          <div className="absolute top-4 right-4 text-green-600/80">
+          <div className="absolute top-4 right-4 text-success/80">
             <CheckCircle2 className="w-6 h-6" />
           </div>
         )}

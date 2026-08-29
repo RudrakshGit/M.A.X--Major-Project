@@ -21,7 +21,7 @@ export function DeleteAccount() {
 
   if (!showConfirm) {
     return (
-      <Button variant="outline" className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700" onClick={() => setShowConfirm(true)}>
+      <Button variant="outline" className="text-signal border-signal/30 hover:bg-signal/10 hover:text-signal" onClick={() => setShowConfirm(true)}>
         <Trash2 className="w-4 h-4 mr-2" />
         Delete My Account
       </Button>
@@ -29,12 +29,12 @@ export function DeleteAccount() {
   }
 
   return (
-    <div className="bg-red-50 border border-red-200 p-4 rounded-xl space-y-4">
+    <div className="bg-signal/10 border border-signal/30 p-4 rounded-xl space-y-4">
       <div className="flex items-start gap-3">
-        <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+        <AlertTriangle className="w-5 h-5 text-signal shrink-0 mt-0.5" />
         <div>
-          <h4 className="font-bold text-red-900">Are you sure?</h4>
-          <p className="text-sm text-red-800/80 mt-1">
+          <h4 className="font-bold text-signal">Are you sure?</h4>
+          <p className="text-sm text-ink-muted mt-1">
             This will permanently delete your account, journals, check-ins, and all companion memories. This action cannot be undone.
           </p>
         </div>

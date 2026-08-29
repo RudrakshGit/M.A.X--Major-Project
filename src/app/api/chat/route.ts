@@ -1,4 +1,4 @@
-import { streamText } from "ai";
+import { streamText, createUIMessageStream, createUIMessageStreamResponse } from "ai";
 import { model } from "@/ai/provider";
 import { buildSystemPrompt } from "@/ai/prompt";
 import { classifyRisk } from "@/safety/classifier";
@@ -83,9 +83,18 @@ export async function POST(req: Request) {
       console.error("Failed background memory summary", err);
     });
 
-    return new Response(reply, {
-      headers: { "Content-Type": "text/plain; charset=utf-8" },
+    // useChat speaks the UI message stream protocol. Returning plain text meant
+    // the reply reached the browser but never rendered as a message.
+    const stream = createUIMessageStream({
+      execute: ({ writer }) => {
+        const id = "reply";
+        writer.write({ type: "text-start", id });
+        writer.write({ type: "text-delta", id, delta: reply });
+        writer.write({ type: "text-end", id });
+      },
     });
+
+    return createUIMessageStreamResponse({ stream });
   } catch (error) {
     console.error("Chat API error:", error);
     return new Response("Internal Server Error", { status: 500 });

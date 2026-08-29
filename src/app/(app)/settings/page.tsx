@@ -65,8 +65,8 @@ export default async function SettingsPage() {
               <DownloadCloud className="w-4 h-4 mr-2" />
               Export My Data (JSON)
             </a>
-            <div className="pt-6 mt-6 border-t border-red-100">
-              <h3 className="text-lg font-bold font-display text-red-900 mb-2">Danger Zone</h3>
+            <div className="pt-6 mt-6 border-t border-signal/20">
+              <h3 className="text-lg font-bold font-display text-signal mb-2">Danger Zone</h3>
               <p className="text-ink/60 text-sm mb-4 max-w-md">
                 Permanently delete your account and all associated data. This action is irreversible.
               </p>

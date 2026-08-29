@@ -59,8 +59,8 @@ export default async function CampusDashboardPage() {
             </p>
           </div>
 
-          <div className="bg-orange-50 border border-orange-200 rounded-2xl p-8 flex flex-col items-center text-center">
-            <AlertCircle className="w-12 h-12 text-orange-500 mb-4" />
+          <div className="bg-signal/10 border border-signal/30 rounded-2xl p-8 flex flex-col items-center text-center">
+            <AlertCircle className="w-12 h-12 text-signal mb-4" />
             <h2 className="text-xl font-bold text-ink mb-2">Insufficient Data</h2>
             <p className="text-ink/80 max-w-md">
               To protect individual student privacy, we enforce a strict minimum cohort size of {MINIMUM_COHORT_SIZE} active users. Your institution currently does not meet this threshold.
@@ -84,7 +84,7 @@ export default async function CampusDashboardPage() {
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
       <div className="max-w-5xl mx-auto space-y-12">
         <div className="space-y-4">
-          <div className="inline-flex items-center rounded-full border border-green-600/20 bg-green-50 px-2.5 py-0.5 text-xs font-semibold text-green-700 mb-2">
+          <div className="inline-flex items-center rounded-full border border-success/30 bg-success/10 px-2.5 py-0.5 text-xs font-semibold text-success mb-2">
             <ShieldCheck className="w-4 h-4 mr-1.5" /> Aggregated & Anonymized
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold text-ink">
@@ -123,7 +123,7 @@ export default async function CampusDashboardPage() {
               <AlertCircle className="w-5 h-5" />
               <h3 className="font-semibold text-sm">Severe PHQ-9 Markers</h3>
             </div>
-            <div className="text-4xl font-bold font-display text-red-600">
+            <div className="text-4xl font-bold font-display text-signal">
               {severePercent}%
             </div>
             <p className="text-xs text-ink/50 mt-2">Of total recent depression screenings</p>
@@ -138,7 +138,7 @@ export default async function CampusDashboardPage() {
                 <div className="w-32 text-sm font-medium text-ink/80">{dist.band}</div>
                 <div className="flex-1 h-3 bg-ink/5 rounded-full overflow-hidden">
                   <div 
-                    className={`h-full rounded-full ${dist.band === "Severe" ? "bg-red-500" : "bg-ink"}`}
+                    className={`h-full rounded-full ${dist.band === "Severe" ? "bg-signal/100" : "bg-ink"}`}
                     style={{ width: `${(dist.count / phq9Total) * 100}%` }}
                   />
                 </div>
