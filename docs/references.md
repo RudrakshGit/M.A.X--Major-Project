@@ -3,17 +3,23 @@
 What to borrow, from where, and what we are legally allowed to copy.
 Licences verified 2026-08-29. Re-check before copying anything.
 
-## The licence rule — read this first
+## How to use this page
 
-| Licence | What it means for us |
-| --- | --- |
-| MIT, Apache-2.0, ISC | Copy freely. Keep the copyright notice. Attribute in `THIRD-PARTY.md` |
-| **No licence file** | **All rights reserved.** Read it for ideas. **Never copy the code** |
+Take ideas freely from everything here. An approach, a conversation structure,
+an intent taxonomy, a prompt shape, a screen layout idea — none of that is
+copyrightable, and reimplementing it in our own stack is exactly what a
+reference is for.
 
-A public GitHub repository is *not* automatically open source. Three of the
-mental-health chatbots below have no licence at all. Reading them to understand
-an approach is fine; lifting a function from them is a copyright violation, and
-in a graded project that is plagiarism as well.
+For **verbatim source code**, check the licence column below. MIT, Apache-2.0
+and ISC let us copy directly; keep the copyright notice and list the dependency
+in `THIRD-PARTY.md`. A repository with no licence file is technically all rights
+reserved, so reimplement rather than paste — which is what we would do anyway,
+since those projects are Python and Rasa while we are Next.js and TypeScript.
+
+One habit that matters more than any of this: **cite what you learned from.**
+In a graded project, an uncited borrowing is a problem even when the licence is
+permissive, and a cited one is a strength. Every reference we actually leaned
+on goes in the report's bibliography.
 
 ## Design reference
 
@@ -62,14 +68,18 @@ Full feature list: [Eleanor Health — 10 best apps for mental health](https://w
 
 Record everything we actually ship in `THIRD-PARTY.md` at the repository root.
 
-## Code we may read but must not copy
+## Mental-health projects worth studying
 
-| Repository | Licence | Why look at it |
-| --- | --- | --- |
-| [rrishi0309/Mental-Health-AI-Companion](https://github.com/rrishi0309/Mental-Health-AI-Companion) | MIT | The only mental-health one that is actually reusable. Retool-based, so mostly useful for prompt shape |
-| [PoyBoi/MindEase](https://github.com/PoyBoi/MindEase) | **None** | Python counsellor assistant. Ideas only |
-| [Huzaib/Mental-Health-ChatBot](https://github.com/Huzaib/Mental-Health-ChatBot) | **None** | Rasa NLU, CBT-structured. Useful for intent taxonomy. Ideas only |
-| [kedarsdixit/mental-health-chatbot](https://github.com/kedarsdixit/mental-health-chatbot) | **None** | Ideas only |
+| Repository | Stack | Licence | What to take |
+| --- | --- | --- | --- |
+| [rrishi0309/Mental-Health-AI-Companion](https://github.com/rrishi0309/Mental-Health-AI-Companion) | Retool + GPT-4o | MIT | Prompt shape for a CBT-flavoured companion. Copyable, though little of it transfers |
+| [Huzaib/Mental-Health-ChatBot](https://github.com/Huzaib/Mental-Health-ChatBot) | Rasa NLU, Python | None | **The most useful of these.** Its CBT intent taxonomy — how it categorises what a user is expressing — is a good starting point for our risk and topic labels |
+| [PoyBoi/MindEase](https://github.com/PoyBoi/MindEase) | Python | None | Counsellor-assistant framing and conversation flow |
+| [kedarsdixit/mental-health-chatbot](https://github.com/kedarsdixit/mental-health-chatbot) | Python | None | Speech-driven state assessment; mostly of historical interest |
+
+All four are Python or Rasa, so nothing lifts cleanly into a Next.js codebase.
+Read them for structure and reimplement — which is both the practical route and
+the safe one.
 
 None of these has a safety layer of the kind we are building. That gap is our
 contribution, and it is worth saying so in the report.
