@@ -2,7 +2,6 @@
 
 - **Status:** ready
 - **Phase:** PH-01
-- **Track:** D
 - **Branch:** `feat/scaffold-app`
 - **Read before starting:** `docs/architecture.md`
 
@@ -26,6 +25,7 @@ passes with exit code 0.
 | `src/i18n/request.ts` | create |
 | `src/env.ts` | create |
 | `.env.example` | update |
+| `THIRD-PARTY.md` | create — every dependency, its licence and its purpose |
 
 ## Contract
 
@@ -70,6 +70,7 @@ export const env = serverSchema.parse(process.env);
       `grep -rE "#[0-9a-fA-F]{3,8}" src --include=*.tsx` returns nothing
 - [ ] `npm run check` exits 0
 - [ ] `.env.example` lists every key in `src/env.ts` and contains no real values
+- [ ] `THIRD-PARTY.md` lists every installed dependency with its licence
 
 ## Verify
 

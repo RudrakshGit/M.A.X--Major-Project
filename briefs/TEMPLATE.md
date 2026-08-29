@@ -2,7 +2,6 @@
 
 - **Status:** ready | in-progress | merged
 - **Phase:** PH-0N
-- **Track:** A | B | C | D
 - **Branch:** `feat/<short-name>`
 - **Read before starting:** `docs/<one page>.md`
 

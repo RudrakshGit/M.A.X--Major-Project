@@ -56,15 +56,16 @@ Diagnosis. Medication advice. Crisis counselling by the AI. Live human
 therapist chat, booking or payments. Native mobile apps. Any feature that lets
 an institution identify an individual student.
 
-## Team tracks
+## Real-college demo — a planning constraint
 
-Each member owns a track end to end and can defend it in the viva.
+The campus dashboard will be demonstrated with **real data from our own
+college**, not a seeded fictional institution.
 
-| Track | Owner | Surface |
-| --- | --- | --- |
-| A — Companion & AI | Prayagi Sahajwani | chat, prompts, memory, providers |
-| B — Safety & Trust | Sanskriti Kachole | classifier, escalation, consent, export |
-| C — Content & Journeys | Raja Jain | screeners, resources, journeys, journal |
-| D — Platform & Institution | Rudraksh Mishra | auth, schema, design system, i18n, dashboard |
+That decision has a consequence worth planning for now: the dashboard enforces
+a minimum cohort size of 10, so **it shows nothing until at least ten real
+students have been checking in**. Recruit and onboard classmates during Phase
+04, not in the week before the viva — a dashboard that says "not enough data"
+on demo day proves the privacy rule works but demonstrates nothing else.
 
-Track assignment is the owner's call and may be swapped; the split is not.
+Real users also mean real consent. The consent screen is not a formality here;
+it is the thing that makes using classmates' data defensible.

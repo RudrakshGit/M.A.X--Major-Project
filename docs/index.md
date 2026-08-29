@@ -13,6 +13,7 @@ Read one page for your task. Do not preload this set.
 | Providers, prompts, memory | [`ai.md`](ai.md) |
 | How to take a brief from start to PR | [`workflow.md`](workflow.md) |
 | Writing resources and journeys | [`content-guide.md`](content-guide.md) |
+| Reference apps, and code we may legally reuse | [`references.md`](references.md) |
 | Performance budget for rural networks | [`performance.md`](performance.md) |
 
 Source code, the Drizzle schema and Zod contracts are authoritative.
