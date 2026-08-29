@@ -1,3 +1,4 @@
+import { themeColors } from "./theme-colors";
 import type { Metadata, Viewport } from "next";
 import { Outfit, Geist } from "next/font/google";
 import "./globals.css";
@@ -12,7 +13,7 @@ const outfit = Outfit({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#FAF9F6",
+  themeColor: themeColors.surface,
 };
 
 export const metadata: Metadata = {

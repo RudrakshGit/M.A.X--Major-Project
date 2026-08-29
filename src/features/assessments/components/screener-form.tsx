@@ -120,7 +120,7 @@ export function ScreenerForm({ screener }: { screener: Screener }) {
         ))}
       </div>
 
-      <div className="pt-8 border-t border-ink/10 flex items-center justify-between sticky bottom-0 bg-[#FAF9F6] pb-8">
+      <div className="pt-8 border-t border-ink/10 flex items-center justify-between sticky bottom-0 bg-surface pb-8">
         <p className="text-sm text-ink/60 font-medium">
           {Object.keys(responses).length} of {screener.questions.length} answered
         </p>

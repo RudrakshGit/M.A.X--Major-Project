@@ -22,7 +22,7 @@ export default async function SettingsPage() {
   const companion = await getCompanionSettings(session.user.id);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] px-4 md:px-8 pt-24 pb-32">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
       <div className="max-w-4xl mx-auto space-y-12">
         
         <div className="space-y-4 max-w-2xl">

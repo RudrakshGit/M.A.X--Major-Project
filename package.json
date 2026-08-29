@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npx drizzle-kit push --force && next build --webpack",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "check": "node scripts/check.mjs",
-    "bounded": "node scripts/bounded-run.mjs"
+    "bounded": "node scripts/bounded-run.mjs",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx migrate.ts"
   },
   "dependencies": {
     "@ai-sdk/groq": "^4.0.34",

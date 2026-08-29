@@ -45,7 +45,7 @@ export default async function CampusDashboardPage() {
 
   if (errorMsg === "INSUFFICIENT_DATA") {
     return (
-      <div className="min-h-screen bg-[#FAF9F6] px-4 md:px-8 pt-24 pb-32">
+      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
         <div className="max-w-3xl mx-auto space-y-12">
           <div className="space-y-4">
             <div className="inline-flex items-center rounded-full border border-ink/10 px-2.5 py-0.5 text-xs font-semibold text-ink/60 mb-2">
@@ -81,7 +81,7 @@ export default async function CampusDashboardPage() {
   const severePercent = phq9Total > 0 ? ((severeDepressionCount / phq9Total) * 100).toFixed(1) : 0;
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] px-4 md:px-8 pt-24 pb-32">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
       <div className="max-w-5xl mx-auto space-y-12">
         <div className="space-y-4">
           <div className="inline-flex items-center rounded-full border border-green-600/20 bg-green-50 px-2.5 py-0.5 text-xs font-semibold text-green-700 mb-2">

@@ -1,3 +1,4 @@
+import { themeColors } from "./theme-colors";
 import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
@@ -7,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "A digital mental health and psychological support system for students in higher education.",
     start_url: "/",
     display: "standalone",
-    background_color: "#FAF9F6",
-    theme_color: "#1A1A1A",
+    background_color: themeColors.surface,
+    theme_color: themeColors.ink,
     icons: [
       {
         src: "/favicon.ico",

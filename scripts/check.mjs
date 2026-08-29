@@ -60,6 +60,33 @@ if (existsSync(resolve(root, "src"))) {
   }
 }
 
+
+// 7. First-load JS budget. Only meaningful after a build; see docs/performance.md.
+const manifestPath = resolve(root, ".next/build-manifest.json");
+if (existsSync(manifestPath)) {
+  const { gzipSync } = await import("node:zlib");
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+  const gzipped = (files) => {
+    let bytes = 0;
+    for (const file of new Set(files ?? [])) {
+      const asset = resolve(root, ".next", file);
+      if (existsSync(asset)) bytes += gzipSync(readFileSync(asset)).length;
+    }
+    return Math.round(bytes / 1024);
+  };
+
+  // Polyfills are served only to legacy browsers through the nomodule path, so a
+  // current Android Chrome — the device docs/performance.md targets — never
+  // downloads them. Reported for visibility, deliberately outside the budget.
+  const main = gzipped(manifest.rootMainFiles);
+  const polyfills = gzipped(manifest.polyfillFiles);
+  const budgetKb = 150;
+  console.log(`first-load JS: ${main} KB gzipped (budget ${budgetKb} KB), plus ${polyfills} KB legacy polyfills`);
+  if (main > budgetKb) fail(`First-load JS is ${main} KB gzipped; budget is ${budgetKb} KB`);
+} else {
+  console.log("first-load JS: skipped (no build present — run npm run build first)");
+}
+
 if (failures.length) {
   console.error(`\ncheck failed (${failures.length}):`);
   for (const failure of failures) console.error(`  - ${failure}`);

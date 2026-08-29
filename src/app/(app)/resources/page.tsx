@@ -10,7 +10,7 @@ export default function ResourcesIndexPage() {
   const topics = Object.values(resources);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] px-4 md:px-8 pt-24 pb-24">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
       <div className="max-w-5xl mx-auto space-y-12">
         <div className="space-y-4 max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-display font-bold text-ink">

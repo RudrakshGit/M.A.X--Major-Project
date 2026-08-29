@@ -22,7 +22,7 @@ export default async function ResourceTopicPage({ params }: { params: Promise<{ 
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] px-4 md:px-8 pt-24">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
       <div className="max-w-3xl mx-auto mb-8">
         <Link 
           href="/resources" 

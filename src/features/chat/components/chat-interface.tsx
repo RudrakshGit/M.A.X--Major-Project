@@ -93,7 +93,7 @@ export function ChatInterface({ initialMessages = [] }: { initialMessages?: UIMe
 
       <form 
         onSubmit={handleSubmit} 
-        className="relative mt-auto flex items-center bg-white border border-ink/10 rounded-full shadow-sm pr-2"
+        className="relative mt-auto flex items-center bg-surface-card border border-ink/10 rounded-full shadow-sm pr-2"
       >
         <Input
           value={input}

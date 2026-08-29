@@ -29,7 +29,9 @@ evidence behind each number is in [`research.md`](research.md) §5.
 
 ## Verification
 
-`npm run check` does **not** yet enforce the JS budget — brief 015 adds it.
-Until then the number above is a target, not a gate. Record a
+`npm run check` enforces the first-load JS budget after a build and fails when
+it is exceeded. It measures the modern bundle only: legacy polyfills ship
+through the `nomodule` path, which a current Android Chrome never downloads, so
+they are reported alongside the number but excluded from the budget. Record a
 Lighthouse run on mobile throttling in `plans/completed/` at each phase gate —
 that trend is a report figure, not a chore.

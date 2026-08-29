@@ -31,7 +31,7 @@ export default async function AssessmentPage({ params }: { params: Promise<{ ins
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] px-4 md:px-8 pt-24">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
       <ScreenerForm screener={screener} />
     </div>
   );
