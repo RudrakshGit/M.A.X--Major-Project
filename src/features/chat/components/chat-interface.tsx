@@ -134,16 +134,17 @@ export function ChatInterface({
             </span>
 
             <Button
-              variant="ghost"
-              size="icon"
+              variant="outline"
+              size="sm"
               onClick={async () => {
                 const fresh = await createNewConversation(userId);
                 if (fresh) handleConversationCreated(fresh);
               }}
-              className="h-8 w-8 text-ink-muted hover:text-ink"
-              title="New Chat"
+              className="h-8 px-2.5 gap-1.5 text-xs font-semibold text-ink bg-surface-card border-ink/10 hover:bg-ink hover:text-surface transition-all rounded-lg shadow-2xs active:scale-95"
+              title="Start a new chat"
             >
-              <MessageSquarePlus className="w-4 h-4" />
+              <MessageSquarePlus className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">New Chat</span>
             </Button>
           </div>
         </div>

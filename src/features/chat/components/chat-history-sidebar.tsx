@@ -272,22 +272,29 @@ export function ChatHistorySidebar({
         )}
       >
         {/* Sidebar Header */}
-        <div className="p-3 border-b border-ink/5 flex items-center justify-between gap-2">
+        <div className="p-3 border-b border-ink/5 flex items-center justify-between gap-2 bg-surface">
           <Button
             onClick={handleNewChat}
             disabled={isPending}
             title={`Start a new chat with ${companionName}`}
-            className="flex-1 justify-start gap-2 bg-ink hover:bg-ink/90 text-surface text-xs h-9 rounded-lg"
+            className="flex-1 justify-between items-center gap-2 bg-ink hover:bg-ink/90 text-surface text-xs font-semibold h-10 px-3.5 rounded-xl shadow-xs transition-all active:scale-[0.98] group"
           >
-            <MessageSquarePlus className="w-4 h-4" />
-            <span>New Chat</span>
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded-md bg-surface/15 flex items-center justify-center group-hover:bg-surface/25 transition-colors">
+                <MessageSquarePlus className="w-3.5 h-3.5 text-surface" />
+              </div>
+              <span className="font-semibold tracking-tight">New Chat</span>
+            </div>
+            <span className="text-[11px] font-mono font-medium text-surface/70 bg-surface/15 px-1.5 py-0.5 rounded-md">
+              +
+            </span>
           </Button>
 
           <Button
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="h-9 w-9 text-ink-muted hover:text-ink shrink-0"
+            className="h-10 w-10 rounded-xl text-ink-muted hover:text-ink hover:bg-ink/5 shrink-0"
             title="Collapse Sidebar"
           >
             <ChevronLeft className="w-4 h-4" />

@@ -19,30 +19,23 @@ function isActive(pathname: string, href: string) {
 
 export function AppHeader() {
   return (
-    <header className="h-16 shrink-0 flex items-center gap-3 px-4 sm:px-8 border-b border-ink/5 bg-surface">
-      <Link href="/" className="flex-1 flex items-center gap-3 group">
-        {/* Brand Icon */}
-        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-ink text-surface flex items-center justify-center font-display font-bold text-sm shadow-xs transition-transform group-hover:scale-105 shrink-0">
-          M
-        </div>
-
-        <div className="flex flex-col justify-center min-w-0">
-          <div className="flex items-center gap-2">
-            <span className="text-lg sm:text-xl font-display font-extrabold tracking-tight text-ink leading-tight">
-              M.A.X
-            </span>
-            <span className="text-[11px] font-medium text-ink/60 hidden md:inline-block border-l border-ink/15 pl-2">
-              Mental-health Assistance &amp; Expert
-            </span>
-          </div>
-          <span className="text-[10px] sm:text-[11px] text-ink-muted leading-tight truncate">
-            Your empathetic college mental health buddy
+    <header className="h-16 shrink-0 flex items-center gap-4 px-4 sm:px-8 border-b border-ink/5 bg-surface">
+      <Link href="/" className="flex-1 flex flex-col justify-center group min-w-0">
+        <div className="flex items-baseline gap-2.5 flex-wrap">
+          <span className="text-2xl font-display font-extrabold tracking-tight text-ink">
+            M.A.X
+          </span>
+          <span className="text-sm sm:text-base font-display font-semibold text-ink/85 tracking-tight">
+            Mental-health Assistance &amp; Expert
           </span>
         </div>
+        <p className="text-[11px] font-sans text-ink-muted/80 tracking-normal leading-tight mt-0.5">
+          Your safe, empathetic college mental buddy · Always here to listen
+        </p>
       </Link>
       <Link
         href="/settings"
-        className="text-ink-muted hover:text-ink transition-colors p-1.5 rounded-md hover:bg-ink/5"
+        className="text-ink-muted hover:text-ink transition-colors p-2 rounded-lg hover:bg-ink/5"
         aria-label="Settings"
       >
         <Settings className="w-5 h-5" />
@@ -50,7 +43,7 @@ export function AppHeader() {
       {/* Present on every screen at every risk level, per docs/safety.md. */}
       <Link
         href="/referrals"
-        className="rounded-lg border border-signal/30 bg-signal/10 px-3 py-1.5 text-sm font-medium text-signal transition-colors hover:bg-signal/20 shrink-0"
+        className="rounded-lg border border-signal/30 bg-signal/10 px-3.5 py-1.5 text-sm font-medium text-signal transition-colors hover:bg-signal/20 shrink-0 shadow-2xs"
       >
         Urgent help
       </Link>
