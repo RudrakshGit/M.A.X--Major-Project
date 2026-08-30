@@ -3,13 +3,14 @@
 import { useChat, UIMessage } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useEffect, useRef, useState, useTransition } from "react";
-import { Send, Loader2, PanelLeft, MessageSquarePlus, Sparkles, BookmarkPlus, ClipboardList } from "lucide-react";
+import { Send, Loader2, PanelLeft, MessageSquarePlus, Sparkles, BookmarkPlus, ClipboardList, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CrisisCard } from "./crisis-card";
 import { ChatHistorySidebar, ConversationItem } from "./chat-history-sidebar";
 import { InChatJournalCard } from "./in-chat-journal-card";
 import { InChatScreenerCard } from "./in-chat-screener-card";
+import { InChatRenameCard } from "./in-chat-rename-card";
 import { loadChatHistory, createNewConversation } from "../actions";
 import { cn } from "@/lib/utils";
 
@@ -157,6 +158,7 @@ export function ChatInterface({
           key={activeConversation.id}
           conversationId={activeConversation.id}
           initialMessages={currentMessages}
+          userId={userId}
           companionName={companionName}
           onCompanionNameChanged={(name) => setCompanionName(name)}
           onFirstMessageSent={(text) => {
@@ -219,12 +221,14 @@ function parseMessageContent(rawText: string) {
 function ChatStreamArea({
   conversationId,
   initialMessages,
+  userId,
   companionName,
   onCompanionNameChanged,
   onFirstMessageSent,
 }: {
   conversationId: string;
   initialMessages: UIMessage[];
+  userId: string;
   companionName: string;
   onCompanionNameChanged?: (name: string) => void;
   onFirstMessageSent: (text: string) => void;
@@ -238,7 +242,7 @@ function ChatStreamArea({
   });
 
   const [input, setInput] = useState("");
-  const [activeManualTool, setActiveManualTool] = useState<"journal" | "screener" | null>(null);
+  const [activeManualTool, setActiveManualTool] = useState<"journal" | "screener" | "rename" | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value);
@@ -392,6 +396,19 @@ function ChatStreamArea({
             </div>
           )}
 
+          {activeManualTool === "rename" && (
+            <div className="w-full my-2 animate-in fade-in duration-200">
+              <InChatRenameCard
+                userId={userId}
+                currentName={companionName}
+                onDismiss={() => setActiveManualTool(null)}
+                onNameUpdated={(newName) => {
+                  onCompanionNameChanged?.(newName);
+                }}
+              />
+            </div>
+          )}
+
           {isGenerating && (
             <div className="flex items-center space-x-2 text-ink/50 mr-auto py-1">
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -407,7 +424,7 @@ function ChatStreamArea({
         </div>
 
         {/* In-Chat Quick Action Tools Bar */}
-        <div className="flex items-center gap-2 mb-2 px-1">
+        <div className="flex items-center gap-2 mb-2 px-1 flex-wrap">
           <span className="text-[11px] font-medium text-ink-muted hidden sm:inline">
             Quick Tools:
           </span>
@@ -442,6 +459,22 @@ function ChatStreamArea({
           >
             <ClipboardList className="w-3.5 h-3.5" />
             <span>Take Check-in Screener</span>
+          </Button>
+
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setActiveManualTool((prev) => (prev === "rename" ? null : "rename"))}
+            className={cn(
+              "h-7 px-2.5 rounded-full text-[11px] gap-1.5 border-ink/10 transition-all",
+              activeManualTool === "rename"
+                ? "bg-clay text-white border-clay font-medium"
+                : "bg-surface-card hover:bg-ink/5 text-ink/80"
+            )}
+          >
+            <UserCheck className="w-3.5 h-3.5" />
+            <span>Rename Buddy</span>
           </Button>
         </div>
 
