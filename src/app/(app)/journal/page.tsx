@@ -11,7 +11,7 @@ export default async function JournalPage() {
   const entries = await getJournalHistory();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8 pb-20">
       <div className="max-w-2xl mx-auto space-y-12">
         
         <div className="space-y-2">

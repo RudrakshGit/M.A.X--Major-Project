@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function AssessmentsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8 pb-20">
       <h1 className="font-display text-3xl font-bold tracking-tight text-ink">Check in</h1>
       <p className="mt-2 max-w-xl text-ink-muted">
         Short questionnaires that help you see how you have been doing. They are

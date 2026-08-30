@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function ReferralsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8 pb-20">
       <div className="max-w-4xl mx-auto space-y-12">
         <div className="space-y-4">
           <div className="inline-flex items-center rounded-full border border-signal/30 bg-signal/10 px-2.5 py-0.5 text-xs font-semibold text-signal mb-2">

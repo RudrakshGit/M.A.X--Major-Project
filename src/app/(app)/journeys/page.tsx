@@ -18,7 +18,7 @@ export default async function JourneysCatalogPage() {
   const availableJourneys = allJourneys.filter(j => !enrolmentMap.has(j.id));
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8 pb-20">
       <div className="max-w-5xl mx-auto space-y-16">
         
         <div className="space-y-4 max-w-2xl">
