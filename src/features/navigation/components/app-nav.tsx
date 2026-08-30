@@ -19,13 +19,23 @@ function isActive(pathname: string, href: string) {
 
 export function AppHeader() {
   return (
-    <header className="h-16 shrink-0 flex items-center gap-4 px-4 sm:px-8 border-b border-ink/5 bg-surface">
-      <Link href="/" className="flex-1">
-        <span className="text-2xl font-display font-bold tracking-tight text-ink">M.A.X</span>
+    <header className="h-16 shrink-0 flex items-center gap-3 px-4 sm:px-8 border-b border-ink/5 bg-surface">
+      <Link href="/" className="flex-1 flex items-center gap-2.5">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-2">
+            <span className="text-xl sm:text-2xl font-display font-bold tracking-tight text-ink">M.A.X</span>
+            <span className="hidden sm:inline-block text-[11px] font-medium px-2 py-0.5 rounded-full bg-clay/10 text-clay border border-clay/20">
+              Mental-health Access &amp; eXpression
+            </span>
+          </div>
+          <span className="text-[10px] text-ink-muted hidden xs:block">
+            Your safe, stigma-free college companion
+          </span>
+        </div>
       </Link>
       <Link
         href="/settings"
-        className="text-ink-muted hover:text-ink transition-colors"
+        className="text-ink-muted hover:text-ink transition-colors p-1.5 rounded-md hover:bg-ink/5"
         aria-label="Settings"
       >
         <Settings className="w-5 h-5" />
@@ -33,7 +43,7 @@ export function AppHeader() {
       {/* Present on every screen at every risk level, per docs/safety.md. */}
       <Link
         href="/referrals"
-        className="rounded-lg border border-signal/30 bg-signal/10 px-3 py-1.5 text-sm font-medium text-signal transition-colors hover:bg-signal/20"
+        className="rounded-lg border border-signal/30 bg-signal/10 px-3 py-1.5 text-sm font-medium text-signal transition-colors hover:bg-signal/20 shrink-0"
       >
         Urgent help
       </Link>

@@ -11,14 +11,14 @@ import { classifyRisk } from "@/safety/classifier";
 import { inspectOutput, GUARD_FALLBACK } from "@/safety/guard";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getOrCreateConversation, saveMessage, getCompanionSettings, getMemorySummary } from "@/features/chat/actions";
+import { getOrCreateConversation, saveMessage, getCompanionSettings, getMemorySummary, touchConversation } from "@/features/chat/actions";
 import { generateMemorySummary } from "@/ai/memory";
 
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
   try {
-    const { messages }: { messages: UIMessage[] } = await req.json();
+    const { messages, conversationId }: { messages: UIMessage[]; conversationId?: string } = await req.json();
 
     // useChat posts UI messages, whose text lives in parts — not in `content`.
     // Reading `.content` here silently produced undefined, so classification saw
@@ -42,9 +42,19 @@ export async function POST(req: Request) {
     }
 
     const userId = session.user.id;
-    const conversation = await getOrCreateConversation(userId);
+    const conversation = await getOrCreateConversation(userId, conversationId);
     const companionSettings = await getCompanionSettings(userId);
     const memoryResult = await getMemorySummary(userId);
+
+    // Auto-title if it's default title and user gave a message
+    if (lastUserText && (conversation.title.startsWith("Chat with ") || conversation.title === "Conversation")) {
+      const autoTitle = lastUserText.replace(/\n+/g, " ").trim().slice(0, 45);
+      if (autoTitle) {
+        await touchConversation(conversation.id, autoTitle);
+      }
+    } else {
+      await touchConversation(conversation.id);
+    }
 
     let isDistress = false;
 
