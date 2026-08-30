@@ -29,7 +29,7 @@ export function ChatInterface({
   const [conversations, setConversations] = useState<ConversationItem[]>(initialConversations);
   const [activeConversation, setActiveConversation] = useState<ConversationItem>(initialActiveConversation);
   const [currentMessages, setCurrentMessages] = useState<UIMessage[]>(initialMessages);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [, startTransition] = useTransition();
 
   const handleSelectConversation = async (id: string) => {
@@ -93,7 +93,7 @@ export function ChatInterface({
   };
 
   return (
-    <div className="flex h-full w-full max-w-5xl mx-auto rounded-xl shadow-xs border border-ink/5 bg-surface overflow-hidden">
+    <div className="flex h-full w-full bg-surface overflow-hidden">
       {/* Sidebar */}
       <ChatHistorySidebar
         conversations={conversations}
@@ -215,9 +215,10 @@ function ChatStreamArea({
   const isGenerating = status === "submitted" || status === "streaming";
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 p-4 sm:p-6">
-      {/* Messages Scroll Area */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2">
+    <div className="flex-1 flex flex-col min-h-0 w-full bg-surface">
+      <div className="w-full max-w-3xl mx-auto flex-1 flex flex-col min-h-0 p-4 sm:p-6">
+        {/* Messages Scroll Area */}
+        <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2">
         {messages.length === 0 && !error && (
           <div className="h-full flex flex-col items-center justify-center text-center space-y-4 text-ink/70 py-12">
             <div className="w-12 h-12 rounded-full bg-clay/10 text-clay flex items-center justify-center">
@@ -322,10 +323,11 @@ function ChatStreamArea({
         </Button>
       </form>
 
-      <div className="text-center mt-2.5">
-        <p className="text-[11px] text-ink-muted">
-          {companionName} is an AI companion for emotional support and not a medical doctor. In crisis, please use Urgent Help.
-        </p>
+        <div className="text-center mt-2.5">
+          <p className="text-[11px] text-ink-muted">
+            {companionName} is an AI companion for emotional support and not a medical doctor. In crisis, please use Urgent Help.
+          </p>
+        </div>
       </div>
     </div>
   );

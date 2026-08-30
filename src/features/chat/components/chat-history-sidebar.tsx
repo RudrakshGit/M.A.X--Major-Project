@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { MessageSquarePlus, MessageSquare, Trash2, Edit2, Check, X, History, ChevronLeft } from "lucide-react";
+import { useState, useTransition, useEffect, useRef, useCallback } from "react";
+import { MessageSquarePlus, MessageSquare, Trash2, Edit2, Check, X, History, ChevronLeft, GripVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -43,6 +43,37 @@ export function ChatHistorySidebar({
   const [isPending, startTransition] = useTransition();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
+
+  // Resizable state
+  const [sidebarWidth, setSidebarWidth] = useState(280);
+  const [isResizing, setIsResizing] = useState(false);
+  const sidebarRef = useRef<HTMLElement>(null);
+
+  const startResizing = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsResizing(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isResizing) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const newWidth = Math.min(Math.max(e.clientX, 200), 500);
+      setSidebarWidth(newWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isResizing]);
 
   const handleNewChat = () => {
     startTransition(async () => {
@@ -229,10 +260,15 @@ export function ChatHistorySidebar({
       )}
 
       <aside
+        ref={sidebarRef}
+        style={{
+          width: typeof window !== "undefined" && window.innerWidth >= 768 ? `${sidebarWidth}px` : undefined,
+        }}
         className={cn(
-          "fixed md:static inset-y-0 left-0 z-50 md:z-auto w-72 md:w-64 bg-surface border-r border-ink/5 flex flex-col transition-transform duration-200 ease-in-out",
+          "fixed md:static inset-y-0 left-0 z-50 md:z-auto w-72 bg-surface border-r border-ink/5 flex flex-col transition-transform md:transition-none duration-200 ease-in-out shrink-0 select-none relative",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0",
-          !isOpen && "md:hidden"
+          !isOpen && "md:hidden",
+          isResizing && "cursor-col-resize select-none"
         )}
       >
         {/* Sidebar Header */}
@@ -252,6 +288,7 @@ export function ChatHistorySidebar({
             size="icon"
             onClick={onClose}
             className="h-9 w-9 text-ink-muted hover:text-ink shrink-0"
+            title="Collapse Sidebar"
           >
             <ChevronLeft className="w-4 h-4" />
           </Button>
@@ -274,8 +311,20 @@ export function ChatHistorySidebar({
         </div>
 
         {/* Sidebar Footer */}
-        <div className="p-3 border-t border-ink/5 text-[11px] text-ink-muted text-center">
-          Encrypted &amp; private session
+        <div className="p-3 border-t border-ink/5 text-[11px] text-ink-muted text-center flex items-center justify-center gap-1.5">
+          <span>Private &amp; safe session</span>
+        </div>
+
+        {/* Resizer Handle for Desktop */}
+        <div
+          onMouseDown={startResizing}
+          title="Drag to resize sidebar"
+          className={cn(
+            "hidden md:flex absolute top-0 right-0 w-2 h-full cursor-col-resize items-center justify-center hover:bg-clay/20 transition-colors z-20 group",
+            isResizing && "bg-clay/30"
+          )}
+        >
+          <GripVertical className="w-3 h-3 text-ink-muted/40 group-hover:text-ink-muted transition-opacity" />
         </div>
       </aside>
     </>

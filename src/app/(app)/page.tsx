@@ -37,7 +37,7 @@ export default async function AppPage() {
   const conversationList = conversations.length > 0 ? conversations : [activeConversation];
 
   return (
-    <div className="h-[calc(100vh-8.5rem)] flex flex-col">
+    <div className="flex-1 flex flex-col min-h-0 h-full w-full">
       <ChatInterface
         initialConversations={conversationList}
         activeConversation={activeConversation}
