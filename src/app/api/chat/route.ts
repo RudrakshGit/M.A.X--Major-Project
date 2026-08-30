@@ -11,7 +11,7 @@ import { classifyRisk } from "@/safety/classifier";
 import { inspectOutput, GUARD_FALLBACK } from "@/safety/guard";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getOrCreateConversation, saveMessage, getCompanionSettings, getMemorySummary, touchConversation } from "@/features/chat/actions";
+import { getOrCreateConversation, saveMessage, getCompanionSettings, updateCompanionSettings, getMemorySummary, touchConversation } from "@/features/chat/actions";
 import { generateMemorySummary } from "@/ai/memory";
 
 export const maxDuration = 30;
@@ -45,6 +45,18 @@ export async function POST(req: Request) {
     const conversation = await getOrCreateConversation(userId, conversationId);
     const companionSettings = await getCompanionSettings(userId);
     const memoryResult = await getMemorySummary(userId);
+
+    // Direct in-chat companion renaming support
+    if (lastUserText) {
+      const directNameMatch = lastUserText.match(/^(?:please\s+)?(?:change\s+your\s+name\s+to|rename\s+(?:yourself\s+)?to|call\s+yourself|set\s+your\s+name\s+to|mera\s+naam\s+badal\s+kar|tera\s+naam\s+)\s*[:=]?\s*([a-zA-Z0-9_\-\s]{2,25})/i);
+      if (directNameMatch && directNameMatch[1]) {
+        const cleanNewName = directNameMatch[1].trim().slice(0, 30);
+        if (cleanNewName) {
+          await updateCompanionSettings(userId, cleanNewName, companionSettings.tone);
+          companionSettings.name = cleanNewName;
+        }
+      }
+    }
 
     // Auto-title if it's default title and user gave a message
     if (lastUserText && (conversation.title.startsWith("Chat with ") || conversation.title === "Conversation")) {
@@ -103,6 +115,15 @@ export async function POST(req: Request) {
     const generated = await result.text;
     const verdict = inspectOutput(generated);
     const reply = verdict.safe ? generated : GUARD_FALLBACK;
+
+    // Check if the reply or user message requests companion name update
+    const nameTagMatch = reply.match(/:::update_companion_name\{"name":\s*"(.*?)"\}\:::/);
+    if (nameTagMatch && nameTagMatch[1]) {
+      const newName = nameTagMatch[1].trim().slice(0, 30);
+      if (newName) {
+        await updateCompanionSettings(userId, newName, companionSettings.tone);
+      }
+    }
 
     if (!verdict.safe) {
       // Reason code only. Safety records never carry message content.

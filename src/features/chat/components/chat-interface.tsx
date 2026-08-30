@@ -26,11 +26,12 @@ export function ChatInterface({
   activeConversation: initialActiveConversation,
   initialMessages = [],
   userId,
-  companionName = "M.A.X",
+  companionName: initialCompanionName = "M.A.X",
 }: ChatInterfaceProps) {
   const [conversations, setConversations] = useState<ConversationItem[]>(initialConversations);
   const [activeConversation, setActiveConversation] = useState<ConversationItem>(initialActiveConversation);
   const [currentMessages, setCurrentMessages] = useState<UIMessage[]>(initialMessages);
+  const [companionName, setCompanionName] = useState<string>(initialCompanionName);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [, startTransition] = useTransition();
 
@@ -157,6 +158,7 @@ export function ChatInterface({
           conversationId={activeConversation.id}
           initialMessages={currentMessages}
           companionName={companionName}
+          onCompanionNameChanged={(name) => setCompanionName(name)}
           onFirstMessageSent={(text) => {
             if (activeConversation.title.startsWith("Chat with ") || activeConversation.title === "Conversation") {
               const autoTitle = text.slice(0, 40).trim();
@@ -173,6 +175,18 @@ function parseMessageContent(rawText: string) {
   let cleanText = rawText;
   let journalData: { mood?: string; tags?: string[]; summary?: string } | null = null;
   let screenerData: { instrument?: string } | null = null;
+  let updatedName: string | null = null;
+
+  const nameMatch = rawText.match(/:::update_companion_name(\{[\s\S]*?\})\:::/);
+  if (nameMatch) {
+    try {
+      const parsed = JSON.parse(nameMatch[1]);
+      if (parsed.name) updatedName = parsed.name;
+      cleanText = cleanText.replace(nameMatch[0], "").trim();
+    } catch (e) {
+      console.error("Failed to parse update companion name tag", e);
+    }
+  }
 
   const journalMatch = rawText.match(/:::journal_proposal(\{[\s\S]*?\})\:::/);
   if (journalMatch) {
@@ -195,20 +209,26 @@ function parseMessageContent(rawText: string) {
   }
 
   // Strip any trailing partial tags that might be streaming so raw json syntax is never visible
-  cleanText = cleanText.replace(/:::journal_proposal[\s\S]*$/, "").replace(/:::screener_flow[\s\S]*$/, "").trim();
+  cleanText = cleanText
+    .replace(/:::update_companion_name[\s\S]*$/, "")
+    .replace(/:::journal_proposal[\s\S]*$/, "")
+    .replace(/:::screener_flow[\s\S]*$/, "")
+    .trim();
 
-  return { cleanText, journalData, screenerData };
+  return { cleanText, journalData, screenerData, updatedName };
 }
 
 function ChatStreamArea({
   conversationId,
   initialMessages,
   companionName,
+  onCompanionNameChanged,
   onFirstMessageSent,
 }: {
   conversationId: string;
   initialMessages: UIMessage[];
   companionName: string;
+  onCompanionNameChanged?: (name: string) => void;
   onFirstMessageSent: (text: string) => void;
 }) {
   const { messages, sendMessage, status, error } = useChat({
@@ -240,7 +260,19 @@ function ChatStreamArea({
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages, status, error, activeManualTool]);
+
+    // Check if any recent message triggered a name change
+    for (const m of messages) {
+      if (m.role === "assistant") {
+        const msg = m as unknown as { content?: string; parts?: Array<{ type: string; text?: string }> };
+        const raw = msg.parts?.map((p) => (p.type === "text" ? p.text : "")).join(" ") || msg.content || "";
+        const parsed = parseMessageContent(raw);
+        if (parsed.updatedName && parsed.updatedName !== companionName) {
+          onCompanionNameChanged?.(parsed.updatedName);
+        }
+      }
+    }
+  }, [messages, status, error, activeManualTool, companionName, onCompanionNameChanged]);
 
   const hasCrisisError = messages.some((m) =>
     (m as unknown as { parts?: Array<{ type: string }> }).parts?.some(
@@ -323,7 +355,7 @@ function ChatStreamArea({
                 {journalData && (
                   <div className="w-full mt-2">
                     <InChatJournalCard
-                      initialMood={journalData.mood || "2"}
+                      initialMood={journalData.mood || "okay"}
                       initialTags={journalData.tags || []}
                       initialSummary={journalData.summary || ""}
                     />
@@ -346,7 +378,7 @@ function ChatStreamArea({
           {activeManualTool === "journal" && (
             <div className="w-full my-2 animate-in fade-in duration-200">
               <InChatJournalCard
-                initialMood="3"
+                initialMood="okay"
                 onDismiss={() => setActiveManualTool(null)}
                 onSaved={() => setActiveManualTool(null)}
               />
