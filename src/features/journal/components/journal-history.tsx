@@ -1,12 +1,21 @@
 
 
-const MOODS = {
+const MOODS: Record<string, { emoji: string; label: string }> = {
   terrible: { emoji: "😭", label: "Terrible" },
-  bad: { emoji: "🙁", label: "Bad" },
+  "1": { emoji: "😭", label: "Terrible" },
+  very_low: { emoji: "😭", label: "Very Low" },
+  bad: { emoji: "🙁", label: "Down / Bad" },
+  "2": { emoji: "🙁", label: "Down / Bad" },
+  down: { emoji: "🙁", label: "Down" },
+  low: { emoji: "🙁", label: "Low" },
   okay: { emoji: "😐", label: "Okay" },
+  "3": { emoji: "😐", label: "Okay" },
+  neutral: { emoji: "😐", label: "Neutral" },
   good: { emoji: "🙂", label: "Good" },
+  "4": { emoji: "🙂", label: "Good" },
   great: { emoji: "🤩", label: "Great" },
-} as const;
+  "5": { emoji: "🤩", label: "Great" },
+};
 
 type JournalEntry = {
   id: string;

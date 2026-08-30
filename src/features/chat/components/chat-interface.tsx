@@ -174,7 +174,7 @@ function parseMessageContent(rawText: string) {
   let journalData: { mood?: string; tags?: string[]; summary?: string } | null = null;
   let screenerData: { instrument?: string } | null = null;
 
-  const journalMatch = rawText.match(/:::journal_proposal(\{.*?\})\:::/);
+  const journalMatch = rawText.match(/:::journal_proposal(\{[\s\S]*?\})\:::/);
   if (journalMatch) {
     try {
       journalData = JSON.parse(journalMatch[1]);
@@ -184,7 +184,7 @@ function parseMessageContent(rawText: string) {
     }
   }
 
-  const screenerMatch = rawText.match(/:::screener_flow(\{.*?\})\:::/);
+  const screenerMatch = rawText.match(/:::screener_flow(\{[\s\S]*?\})\:::/);
   if (screenerMatch) {
     try {
       screenerData = JSON.parse(screenerMatch[1]);
@@ -193,6 +193,9 @@ function parseMessageContent(rawText: string) {
       console.error("Failed to parse screener flow tag", e);
     }
   }
+
+  // Strip any trailing partial tags that might be streaming so raw json syntax is never visible
+  cleanText = cleanText.replace(/:::journal_proposal[\s\S]*$/, "").replace(/:::screener_flow[\s\S]*$/, "").trim();
 
   return { cleanText, journalData, screenerData };
 }

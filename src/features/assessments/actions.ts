@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { screenerRun } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export async function submitScreenerRun(
   instrument: string,
@@ -31,5 +32,6 @@ export async function submitScreenerRun(
     })
     .returning();
 
+  revalidatePath("/assessments");
   return newRun;
 }
