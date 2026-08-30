@@ -114,16 +114,26 @@ export async function POST(req: Request) {
 
     const generated = await result.text;
     const verdict = inspectOutput(generated);
-    const reply = verdict.safe ? generated : GUARD_FALLBACK;
+    let reply = verdict.safe ? generated : GUARD_FALLBACK;
 
-    // Check if the reply or user message requests companion name update
-    const nameTagMatch = reply.match(/:::update_companion_name\{"name":\s*"(.*?)"\}\:::/);
-    if (nameTagMatch && nameTagMatch[1]) {
-      const newName = nameTagMatch[1].trim().slice(0, 30);
-      if (newName) {
-        await updateCompanionSettings(userId, newName, companionSettings.tone);
+    // Check if the reply requests companion name update
+    const nameTagMatch = reply.match(/:::update_companion_name(\{[\s\S]*?\})\:::/);
+    if (nameTagMatch) {
+      try {
+        const parsed = JSON.parse(nameTagMatch[1]);
+        if (parsed.name) {
+          const newName = String(parsed.name).trim().slice(0, 30);
+          if (newName) {
+            await updateCompanionSettings(userId, newName, companionSettings.tone);
+          }
+        }
+      } catch (e) {
+        console.error("Failed to parse companion name update tag in route", e);
       }
     }
+
+    // Strip update_companion_name tag so internal command is never saved or shown in chat
+    reply = reply.replace(/:::update_companion_name[\s\S]*?:::/g, "").trim();
 
     if (!verdict.safe) {
       // Reason code only. Safety records never carry message content.

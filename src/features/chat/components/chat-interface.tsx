@@ -181,8 +181,7 @@ function parseMessageContent(rawText: string) {
   if (nameMatch) {
     try {
       const parsed = JSON.parse(nameMatch[1]);
-      if (parsed.name) updatedName = parsed.name;
-      cleanText = cleanText.replace(nameMatch[0], "").trim();
+      if (parsed.name) updatedName = String(parsed.name).trim();
     } catch (e) {
       console.error("Failed to parse update companion name tag", e);
     }
@@ -192,7 +191,6 @@ function parseMessageContent(rawText: string) {
   if (journalMatch) {
     try {
       journalData = JSON.parse(journalMatch[1]);
-      cleanText = cleanText.replace(journalMatch[0], "").trim();
     } catch (e) {
       console.error("Failed to parse journal proposal tag", e);
     }
@@ -202,17 +200,17 @@ function parseMessageContent(rawText: string) {
   if (screenerMatch) {
     try {
       screenerData = JSON.parse(screenerMatch[1]);
-      cleanText = cleanText.replace(screenerMatch[0], "").trim();
     } catch (e) {
       console.error("Failed to parse screener flow tag", e);
     }
   }
 
-  // Strip any trailing partial tags that might be streaming so raw json syntax is never visible
+  // Strip all complete or streaming internal tags from visible text
   cleanText = cleanText
-    .replace(/:::update_companion_name[\s\S]*$/, "")
-    .replace(/:::journal_proposal[\s\S]*$/, "")
-    .replace(/:::screener_flow[\s\S]*$/, "")
+    .replace(/:::update_companion_name[\s\S]*?:::/g, "")
+    .replace(/:::journal_proposal[\s\S]*?:::/g, "")
+    .replace(/:::screener_flow[\s\S]*?:::/g, "")
+    .replace(/:::(?:update_companion_name|journal_proposal|screener_flow)[\s\S]*$/, "")
     .trim();
 
   return { cleanText, journalData, screenerData, updatedName };
