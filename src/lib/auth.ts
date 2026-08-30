@@ -16,6 +16,13 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://*.vercel.app",
+  ],
+  advanced: {
+    trustedProxyHeaders: true,
+  },
   user: {
     additionalFields: {
       displayName: {
