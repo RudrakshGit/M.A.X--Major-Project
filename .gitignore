@@ -22,3 +22,11 @@ test-results/
 .vercel
 .env*
 e2e/.auth/
+.agents/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+HANDOFF.md
+briefs/
+plans/
+project/
