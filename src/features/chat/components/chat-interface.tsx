@@ -226,8 +226,30 @@ function ChatStreamArea({
             <div className="space-y-1">
               <p className="text-base sm:text-lg font-semibold text-ink">Hi, I&apos;m {companionName}.</p>
               <p className="text-xs sm:text-sm text-ink-muted max-w-sm">
-                I&apos;m your safe, confidential space. Share whatever is on your mind today—whether it&apos;s exam stress, feeling low, or just needing to vent.
+                I&apos;m your safe, confidential mental buddy. Share whatever is on your mind today.
               </p>
+            </div>
+
+            {/* Quick Starter Prompts */}
+            <div className="flex flex-wrap items-center justify-center gap-2 max-w-md pt-2">
+              {[
+                "I'm feeling stressed about exams & grades",
+                "Hostel life & loneliness is feeling heavy",
+                "I'm feeling anxious and can't relax",
+                "I just want to vent and clear my head",
+              ].map((promptText) => (
+                <button
+                  key={promptText}
+                  type="button"
+                  onClick={() => {
+                    sendMessage({ text: promptText });
+                    onFirstMessageSent(promptText);
+                  }}
+                  className="text-xs px-3 py-1.5 rounded-full bg-surface-card border border-ink/10 text-ink/80 hover:border-ink/30 hover:bg-ink/5 transition-all text-left"
+                >
+                  {promptText}
+                </button>
+              ))}
             </div>
           </div>
         )}

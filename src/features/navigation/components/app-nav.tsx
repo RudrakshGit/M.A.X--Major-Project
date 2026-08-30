@@ -25,11 +25,11 @@ export function AppHeader() {
           <div className="flex items-center gap-2">
             <span className="text-xl sm:text-2xl font-display font-bold tracking-tight text-ink">M.A.X</span>
             <span className="hidden sm:inline-block text-[11px] font-medium px-2 py-0.5 rounded-full bg-clay/10 text-clay border border-clay/20">
-              Mental-health Access &amp; eXpression
+              Mental-health Assistance &amp; eXpert
             </span>
           </div>
           <span className="text-[10px] text-ink-muted hidden xs:block">
-            Your safe, stigma-free college companion
+            Your empathetic mental buddy · Safe college support
           </span>
         </div>
       </Link>

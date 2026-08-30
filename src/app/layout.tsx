@@ -17,8 +17,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "M.A.X",
-  description: "A stigma-free mental health support system for students in higher education.",
+  title: "M.A.X — Mental-health Assistance & eXpert",
+  description: "A safe, stigma-free mental health support system for students in higher education.",
 };
 
 export default function RootLayout({
