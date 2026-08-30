@@ -3,7 +3,7 @@ import { getUserJourneys } from "@/features/journeys/actions";
 import { JourneyCard } from "@/features/journeys/components/journey-card";
 
 export const metadata = {
-  title: "Journeys | MAX",
+  title: "Journeys | M.A.X",
   description: "Structured multi-day programs to help you build better habits and cope with distress.",
 };
 

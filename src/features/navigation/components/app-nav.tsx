@@ -21,7 +21,7 @@ export function AppHeader() {
   return (
     <header className="h-16 shrink-0 flex items-center gap-4 px-4 sm:px-8 border-b border-ink/5 bg-surface">
       <Link href="/" className="flex-1">
-        <span className="text-2xl font-display font-bold tracking-tight text-ink">MAX</span>
+        <span className="text-2xl font-display font-bold tracking-tight text-ink">M.A.X</span>
       </Link>
       <Link
         href="/settings"

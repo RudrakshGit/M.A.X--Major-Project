@@ -2,7 +2,7 @@ import { helplines } from "@/content/referrals";
 import { Phone, Clock, AlertTriangle, ShieldCheck } from "lucide-react";
 
 export const metadata = {
-  title: "Referrals & Helplines | MAX",
+  title: "Referrals & Helplines | M.A.X",
   description: "Verified mental health helplines and crisis resources.",
 };
 

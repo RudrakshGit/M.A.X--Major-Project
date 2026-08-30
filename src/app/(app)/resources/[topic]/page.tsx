@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ topic: st
   if (!topic) return { title: "Not Found" };
   
   return {
-    title: `${topic.title} | MAX Resources`,
+    title: `${topic.title} | M.A.X Resources`,
   };
 }
 

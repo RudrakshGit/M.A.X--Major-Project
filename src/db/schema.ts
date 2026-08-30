@@ -21,7 +21,7 @@ export const user = pgTable("user", {
   image: text("image"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-  // Custom MAX fields
+  // Custom M.A.X fields
   displayName: text("display_name"),
   locale: text("locale").default("en").notNull(),
   institutionId: text("institution_id"),
@@ -98,7 +98,7 @@ export const companion = pgTable("companion", {
     .notNull()
     .unique()
     .references(() => user.id, { onDelete: "cascade" }),
-  name: text("name").default("MAX").notNull(),
+  name: text("name").default("M.A.X").notNull(),
   tone: text("tone").default("warm").notNull(),
   avatarSeed: text("avatar_seed").default("default").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

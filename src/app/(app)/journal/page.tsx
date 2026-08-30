@@ -3,7 +3,7 @@ import { MoodLogger } from "@/features/journal/components/mood-logger";
 import { JournalHistory } from "@/features/journal/components/journal-history";
 
 export const metadata = {
-  title: "Journal | MAX",
+  title: "Journal | M.A.X",
   description: "Track your mood and thoughts.",
 };
 

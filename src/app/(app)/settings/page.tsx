@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { DownloadCloud, Settings2 } from "lucide-react";
 
 export const metadata = {
-  title: "Settings | MAX",
+  title: "Settings | M.A.X",
 };
 
 export default async function SettingsPage() {
@@ -53,7 +53,7 @@ export default async function SettingsPage() {
           <div className="pt-8 border-t border-ink/5">
             <h2 className="text-2xl font-bold font-display text-ink mb-2">Data Export</h2>
             <p className="text-ink/60 text-sm mb-6 max-w-md">
-              Download everything MAX holds about you — your conversations,
+              Download everything M.A.X holds about you — your conversations,
               journal entries, check-ins, screener results and journeys. Your
               data is yours.
             </p>

@@ -65,7 +65,7 @@ export function ScreenerForm({ screener }: { screener: Screener }) {
             <p className="text-3xl font-bold text-ink font-display">{result.band}</p>
             <p className="text-sm text-ink/70 mt-4">
               This is a standard reflection of your responses over the last 2 weeks. It is not a clinical diagnosis. 
-              If you feel overwhelmed, please reach out to MAX or a campus counsellor.
+              If you feel overwhelmed, please reach out to M.A.X or a campus counsellor.
             </p>
           </div>
         </CardContent>

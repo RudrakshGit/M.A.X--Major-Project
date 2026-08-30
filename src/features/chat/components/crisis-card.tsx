@@ -12,7 +12,7 @@ export function CrisisCard() {
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-ink/80 text-sm">
-          It sounds like you are going through a very difficult time. MAX is an AI and cannot provide the help you need right now. Please reach out to one of these free, confidential resources.
+          It sounds like you are going through a very difficult time. M.A.X is an AI and cannot provide the help you need right now. Please reach out to one of these free, confidential resources.
         </p>
         <div className="space-y-3">
           <div className="flex items-start justify-between bg-surface rounded-md p-3">

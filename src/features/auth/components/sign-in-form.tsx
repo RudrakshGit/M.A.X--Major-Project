@@ -65,7 +65,7 @@ export function SignInForm() {
           Welcome back
         </CardTitle>
         <CardDescription className="text-base text-ink/70">
-          Sign in to continue talking with MAX.
+          Sign in to continue talking with M.A.X.
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>

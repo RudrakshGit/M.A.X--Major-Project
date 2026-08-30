@@ -5,8 +5,8 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Chat | MAX",
-  description: "Talk to MAX",
+  title: "Chat | M.A.X",
+  description: "Talk to M.A.X",
 };
 
 export default async function AppPage() {

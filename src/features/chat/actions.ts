@@ -24,7 +24,7 @@ export async function getOrCreateConversation(userId: string) {
     .values({
       id: generateId(),
       userId,
-      title: "Chat with MAX",
+      title: "Chat with M.A.X",
     })
     .returning();
 
@@ -78,7 +78,7 @@ export async function getCompanionSettings(userId: string) {
     .values({
       id: generateId(),
       userId,
-      name: "MAX",
+      name: "M.A.X",
       tone: "warm",
     })
     .returning();

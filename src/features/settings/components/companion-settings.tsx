@@ -46,7 +46,7 @@ export function CompanionSettings({
             id="companion-name" 
             value={name} 
             onChange={(e) => setName(e.target.value)} 
-            placeholder="e.g. MAX"
+            placeholder="e.g. M.A.X"
           />
         </div>
         

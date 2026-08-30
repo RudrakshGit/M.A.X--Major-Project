@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "MAX",
+  title: "M.A.X",
   description: "A stigma-free mental health support system for students in higher education.",
 };
 

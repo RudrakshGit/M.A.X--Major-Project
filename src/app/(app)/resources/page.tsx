@@ -2,7 +2,7 @@ import { resources } from "@/content/resources";
 import { ResourceCard } from "@/features/resources/components/resource-card";
 
 export const metadata = {
-  title: "Resources | MAX",
+  title: "Resources | M.A.X",
   description: "Psycho-educational resources for students.",
 };
 

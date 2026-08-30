@@ -3,7 +3,7 @@ import { instruments } from "@/content/screeners";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata = {
-  title: "Check in | MAX",
+  title: "Check in | M.A.X",
   description: "Short, private questionnaires you can take any time.",
 };
 

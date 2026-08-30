@@ -63,7 +63,7 @@ export function SignUpForm() {
     <Card className="w-full max-w-sm mx-auto shadow-sm">
       <CardHeader className="space-y-2">
         <CardTitle className="text-2xl font-bold font-display tracking-tight text-ink">
-          Welcome to MAX
+          Welcome to M.A.X
         </CardTitle>
         <CardDescription className="text-base text-ink/70">
           Create an anonymous username to get started.

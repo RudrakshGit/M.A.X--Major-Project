@@ -63,7 +63,7 @@ export function ResourceContent({ topic }: { topic: ResourceTopic }) {
             <div className="pt-2">
               <Link href="/">
                 <Button className="rounded-full bg-ink hover:bg-ink/90 text-surface">
-                  Talk to MAX
+                  Talk to M.A.X
                 </Button>
               </Link>
             </div>

@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ instrumen
   if (!screener) return { title: "Not Found" };
   
   return {
-    title: `${screener.title} | MAX`,
+    title: `${screener.title} | M.A.X`,
   };
 }
 

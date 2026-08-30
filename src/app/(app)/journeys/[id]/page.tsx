@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const journey = journeys[id];
   if (!journey) return { title: "Not Found" };
-  return { title: `${journey.title} | MAX Journeys` };
+  return { title: `${journey.title} | M.A.X Journeys` };
 }
 
 export default async function JourneyDetailPage({ params }: { params: Promise<{ id: string }> }) {

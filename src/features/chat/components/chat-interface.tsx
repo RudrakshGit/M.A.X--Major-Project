@@ -47,7 +47,7 @@ export function ChatInterface({ initialMessages = [] }: { initialMessages?: UIMe
       >
         {messages.length === 0 && !error && (
           <div className="h-full flex flex-col items-center justify-center text-center space-y-4 text-ink/70">
-            <p className="text-lg font-medium text-ink">Hi, I&apos;m MAX.</p>
+            <p className="text-lg font-medium text-ink">Hi, I&apos;m M.A.X.</p>
             <p className="max-w-md">I&apos;m here to listen. You can talk to me about whatever is on your mind today.</p>
           </div>
         )}
@@ -84,7 +84,7 @@ export function ChatInterface({ initialMessages = [] }: { initialMessages?: UIMe
         {isGenerating && (
           <div className="flex items-center space-x-2 text-ink/50 mr-auto">
             <Loader2 className="w-4 h-4 animate-spin" />
-            <span className="text-sm">MAX is typing...</span>
+            <span className="text-sm">M.A.X is typing...</span>
           </div>
         )}
 
@@ -102,7 +102,7 @@ export function ChatInterface({ initialMessages = [] }: { initialMessages?: UIMe
         <Input
           value={input}
           onChange={handleInputChange}
-          placeholder={hasCrisisError ? "Session paused" : "Message MAX..."}
+          placeholder={hasCrisisError ? "Session paused" : "Message M.A.X..."}
           disabled={hasCrisisError || isGenerating}
           className="flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 px-6 py-6 text-base shadow-none"
         />
@@ -117,7 +117,7 @@ export function ChatInterface({ initialMessages = [] }: { initialMessages?: UIMe
         </Button>
       </form>
       <div className="text-center mt-3">
-        <p className="text-xs text-ink/50">MAX is an AI and cannot handle emergencies. In a crisis, reach out to a human helpline.</p>
+        <p className="text-xs text-ink/50">M.A.X is an AI and cannot handle emergencies. In a crisis, reach out to a human helpline.</p>
       </div>
     </div>
   );

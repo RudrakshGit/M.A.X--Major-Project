@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { Lock, Users, AlertCircle, LineChart, ShieldCheck } from "lucide-react";
 
 export const metadata = {
-  title: "Campus Dashboard | MAX",
+  title: "Campus Dashboard | M.A.X",
 };
 
 export default async function CampusDashboardPage() {

@@ -3,8 +3,8 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "MAX - Mental Health Support",
-    short_name: "MAX",
+    name: "M.A.X - Mental Health Support",
+    short_name: "M.A.X",
     description: "A digital mental health and psychological support system for students in higher education.",
     start_url: "/",
     display: "standalone",
