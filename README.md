@@ -1,4 +1,4 @@
-# MAX — Mental-health Access & eXpression
+# M.A.X - Mental-health Assistance & eXpert
 
 A stigma-free mental health support system for students in higher education.
 
@@ -6,7 +6,7 @@ A stigma-free mental health support system for students in higher education.
 Prayagi Sahajwani · Sanskriti Kachole · Raja Jain · Rudraksh Mishra
 
 > Indian colleges now carry a legal duty to provide mental health support that
-> most rural and semi-urban campuses cannot staff. MAX is the digital
+> most rural and semi-urban campuses cannot staff. M.A.X is the digital
 > instrument that fills the gap between "a counsellor is mandated" and
 > "a counsellor exists".
 
@@ -22,37 +22,29 @@ identify a student.
 
 Built for a budget Android on a 4G tower.
 
-**Live:** https://max-rudrakshm099-7145s-projects.vercel.app
+**Live:** https://max-coral-ten.vercel.app
 
 ## Start here
 
 | You are | Read |
 | --- | --- |
-| An agent picking up a task | [`HANDOFF.md`](HANDOFF.md), then [`AGENTS.md`](AGENTS.md) |
 | A teammate joining | [`docs/product.md`](docs/product.md) then [`docs/architecture.md`](docs/architecture.md) |
 | Writing the report | [`docs/research.md`](docs/research.md) — every citation lives there |
 | Touching anything near the model | [`docs/safety.md`](docs/safety.md), all of it |
 
-## Commands
+## Local Development
 
 ```bash
-npm run check
+npm install
+npm run dev
 ```
 
-Runs repo hygiene, and lint, typecheck and tests once the app exists. Always
-report its real exit code — never a summary of it.
-
-```bash
-npm run bounded -- <label> <command>
-```
-
-Wraps a noisy command so the full output goes to an ignored log and you see
-only status plus a short tail.
+The app will be available at http://localhost:3000.
 
 ## Stack
 
 Next.js · Tailwind · shadcn/ui · Drizzle · Neon Postgres · Better Auth ·
-Vercel AI SDK on Groq · Playwright · Vercel Hobby (`bom1`).
+Vercel AI SDK on Groq · Playwright · Vercel Hobby.
 
 Every tier is free and needs no credit card.
 
