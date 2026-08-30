@@ -22,7 +22,7 @@ identify a student.
 
 Built for a budget Android on a 4G tower.
 
-**Live:** https://max-coral-ten.vercel.app
+**Live:** https://max-mental-health-expert.vercel.app
 
 ## Start here
 
