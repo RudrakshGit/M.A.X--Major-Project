@@ -259,15 +259,14 @@ function ChatStreamArea({
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
 
-    // Check if any recent message triggered a name change
-    for (const m of messages) {
-      if (m.role === "assistant") {
-        const msg = m as unknown as { content?: string; parts?: Array<{ type: string; text?: string }> };
-        const raw = msg.parts?.map((p) => (p.type === "text" ? p.text : "")).join(" ") || msg.content || "";
-        const parsed = parseMessageContent(raw);
-        if (parsed.updatedName && parsed.updatedName !== companionName) {
-          onCompanionNameChanged?.(parsed.updatedName);
-        }
+    // Check if the latest assistant message triggered a name change
+    const lastAssistantMsg = [...messages].reverse().find((m) => m.role === "assistant");
+    if (lastAssistantMsg) {
+      const msg = lastAssistantMsg as unknown as { content?: string; parts?: Array<{ type: string; text?: string }> };
+      const raw = msg.parts?.map((p) => (p.type === "text" ? p.text : "")).join(" ") || msg.content || "";
+      const parsed = parseMessageContent(raw);
+      if (parsed.updatedName && parsed.updatedName !== companionName) {
+        onCompanionNameChanged?.(parsed.updatedName);
       }
     }
   }, [messages, status, error, activeManualTool, companionName, onCompanionNameChanged]);
