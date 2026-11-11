@@ -1,1 +1,0 @@
-ALTER TABLE "companion" ALTER COLUMN "name" SET DEFAULT 'M.A.X';

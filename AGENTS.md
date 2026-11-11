@@ -1,49 +1,31 @@
-# MAX — agent operating guide
+# MAX website — agent operating guide
 
-MAX (Mental-health Assistance & eXpert) is a stigma-free mental health support
-system for students in higher education. Major project E-G18.
-
-Read this file, then **one** `docs/` page for your task. Do not preload `docs/`.
-
-## Start here
-
-0. Read `HANDOFF.md` first. It is the current state of the project and the
-   traps that will bite you. Update it in the same commit as your change.
-1. Your task comes from a brief in `briefs/`. It names the files, the schema and
-   the acceptance check. Follow it; do not widen the scope.
-2. Current phase and queue: `project/state.json`. Read it only when planning.
-3. Route to detail with `docs/index.md`.
-4. Finish with `npm run check`. Paste the real exit code, never a summary.
-
-## Invariants — these break the product if violated
-
-- **Safety is not a prompt.** Every model reply passes through
-  `src/safety/`. Never call an LLM from a route or component directly.
-- **No diagnosis, no medication, no crisis counselling** from the AI. Screeners
-  report bands, never a condition name as a verdict.
-- **An institution never sees an individual.** Campus queries return aggregates
-  with a minimum cohort size. No user id leaves that boundary.
-- **No PII to any model.** No name, email, roll number, college. Strip at the
-  provider boundary, not in the prompt.
-- **Secrets stay in `.env.local`.** Only names go in `.env.example`.
-- Never delete or rewrite another track's files to make your check pass.
+The public website for MAX (major project E-G18): a landing page, the Android download, helplines, and the
+college counsellors' dashboard. The student app itself is a separate Expo project (`../max-app`); its web build is
+"Try now" at https://max-companion.expo.app. Read `HANDOFF.md` first.
 
 ## Map
 
-- `src/app/` routes · `src/features/<domain>/` owned UI + actions
-- `src/safety/` risk classification, output guard, escalation
-- `src/db/` Drizzle schema and queries · `src/content/` journeys and resources
-- `docs/` one topic per page · `briefs/` your task · `plans/active/` multi-day work
+- `src/app/` pages: `/` landing, `/try` (the demo), `/download`, `/help`, `/college` (dashboard), `/admin`.
+- `src/components/` shared UI (`Sketch` outlines, plain buttons), `college/` dashboard client components.
+- `src/lib/max-api.ts` the only code that talks to the MAX server (college and auth routes).
+- `src/content/` the app version and APK details (`app.ts`), helplines (`referrals.ts`, same list as the app).
 
-## Rules of the house
+## Invariants
 
-- Server Components by default. A client island needs a reason in the PR.
-- Zod schema first, then the Server Action, then the UI. Never the reverse.
-- Tailwind tokens only — no hex values, no arbitrary radii, no new palette.
-- UI proof is headless Playwright. The in-app browser pane is unreliable here.
-- Conventional Commits. One PR owns one concern.
-- The interface is English only. The safety classifier still handles Hindi and
-  Hinglish input — those patterns are load-bearing, not dead code.
+- **The dashboard never sees one student.** It only shows what the server returns (10+ students, blurred).
+- **No accounts for students on this site.** Students use the app or "Try now"; only staff sign in, with Google.
+- **Helplines need no sign-in** and match the app's Help screen.
+- **No secrets in the repo.** The Google client id comes from `NEXT_PUBLIC_GOOGLE_CLIENT_ID`.
+- **Look like the app:** its tokens in `globals.css`; only card outlines are sketched, buttons are plain.
+- No AI attribution in commits or PRs.
+
+## Check
+
+```bash
+npm run check   # lint + typecheck + repo hygiene
+npm run build
+```
 
 <!-- BEGIN:nextjs-agent-rules -->
 

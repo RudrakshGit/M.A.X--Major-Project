@@ -1,0 +1,13 @@
+# What the Vercel CLI leaves out. The APK in public/downloads is git-ignored but must be deployed, so this file
+# replaces .gitignore for deploys.
+node_modules
+.next
+.env
+.env.*
+!.env.example
+.git
+project
+plans
+briefs
+rough
+docs

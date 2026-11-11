@@ -10,48 +10,22 @@ Prayagi Sahajwani · Sanskriti Kachole · Raja Jain · Rudraksh Mishra
 > instrument that fills the gap between "a counsellor is mandated" and
 > "a counsellor exists".
 
-## What it does
+## What this repo is
 
-A companion the student names and talks to at any hour, wrapped in a safety
-layer that never lets a model handle a crisis alone. Around it: mood check-ins,
-public-domain screeners, a resource library and short guided journeys across
-the six conditions in our problem statement — anxiety, depression, burnout,
-sleep, academic stress and social isolation. Behind it: a referral directory,
-and an anonymous aggregate dashboard for the institution that can never
-identify a student.
-
-Built for a budget Android on a 4G tower.
+The public website for MAX: a landing page, the Android download, helplines, and the anonymous dashboard for college
+counsellors. The student app is the MAX Android app (separate Expo project); its web version is "Try now" at
+https://max-companion.expo.app. See `HANDOFF.md`.
 
 **Live:** https://max-mental-health-expert.vercel.app
 
-## Start here
-
-| You are | Read |
-| --- | --- |
-| A teammate joining | [`docs/product.md`](docs/product.md) then [`docs/architecture.md`](docs/architecture.md) |
-| Writing the report | [`docs/research.md`](docs/research.md) — every citation lives there |
-| Touching anything near the model | [`docs/safety.md`](docs/safety.md), all of it |
-
-## Local Development
+## Local development
 
 ```bash
 npm install
 npm run dev
 ```
 
-The app will be available at http://localhost:3000.
-
 ## Stack
 
-Next.js · Tailwind · shadcn/ui · Drizzle · Neon Postgres · Better Auth ·
-Vercel AI SDK on Groq · Playwright · Vercel Hobby.
-
-Every tier is free and needs no credit card.
-
-## The rules that matter most
-
-1. Safety is code in `src/safety/`, never prompt text. No model call bypasses it.
-2. No diagnosis, no medication advice, no crisis counselling from the AI.
-3. An institution sees aggregates only, with a minimum cohort size.
-4. No personal data ever reaches a model provider.
-5. The interface is English, but the safety classifier must still read Hinglish.
+Next.js · Tailwind · roughjs (sketched card outlines) · Google Identity Services · Vercel Hobby. Data comes from the
+MAX server (Expo Router API routes on EAS Hosting, Postgres on Neon). Every tier is free.

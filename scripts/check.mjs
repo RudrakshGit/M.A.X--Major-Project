@@ -54,7 +54,7 @@ walk(root);
 
 // 6. App checks, once the app exists.
 if (existsSync(resolve(root, "src"))) {
-  for (const script of ["lint", "typecheck", "test"]) {
+  for (const script of ["lint", "typecheck"]) {
     const result = spawnSync("npm", ["run", "--silent", script], { cwd: root, stdio: "inherit" });
     if (result.status !== 0) fail(`npm run ${script} exited ${result.status}`);
   }

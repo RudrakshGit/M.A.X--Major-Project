@@ -22,3 +22,6 @@ test-results/
 .vercel
 .env*
 e2e/.auth/
+
+# APKs are deployed with the site but never committed (40 MB each)
+/public/downloads/*.apk

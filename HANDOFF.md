@@ -1,85 +1,38 @@
 # Current state — read this before you touch anything
 
-Last updated 2026-08-30. Keep it current: when you finish a task, edit this file
-in the same commit. A stale handoff is worse than none.
+Last updated 2026-11-11.
 
-## Where things stand
+## What this site is now
 
-MAX is deployed and working at
-**https://max-mental-health-expert.vercel.app** — public, no login wall
-on the deployment itself. Helplines and resources are readable without an
-account, which is deliberate: someone in crisis should not have to sign up.
+Until November 2026 this repo was MAX's student web app (chat, journal, check-ins, its own database and logins).
+The product is now the MAX Android app (`../max-app`), so on 11 Nov 2026 (owner) this repo became the public
+website. The old student app is in git history (before this change); its features live in the app.
 
-Verified against production on 2026-08-30: 9 Playwright tests, 112 unit tests,
-`npm run check` exit 0, first-load JS 129 KB against a 150 KB budget.
+- `/` landing: what MAX does, screenshots, privacy, web vs app, colleges. "Try the demo" goes to `/try`;
+  "Download for Android" to `/download`.
+- `/try`: the demo, on this site (owner: it must stay on the website and say it's a demo). The app's own web build
+  (https://max-companion.expo.app: no sign-up, data in the browser, 20 chats a day, no reminders, backup, voice
+  notes or college sharing) runs in an iframe: a phone frame with the limits beside it on wide screens, full
+  screen under a slim "Demo" bar on phones. Opened on its own, the web app shows its own demo bar.
+- `/features`: every feature by area, "App" marking what the demo leaves out.
+- Landing: the hero line changes with the time of day (`components/Headline.tsx`); MAX's right arm waves only on
+  hover (`components/HeroMax.tsx`, CSS in `globals.css`); "Meet MAX" is deliberately plain (owner disliked cards).
+- `/download`: the APK, served from `public/downloads/` (git-ignored, deployed by the Vercel CLI through
+  `.vercelignore`). No sign-in: the APK is public and an account would only add friction. Update
+  `src/content/app.ts` and copy the new APK in with each release.
+- `/help`: the same helplines as the app.
+- `/college`: a page for visitors with the steps and the registration form right there (no sign-in to apply:
+  `POST /api/college/apply`, verified by phone in `/admin`, then the applicant signs in with Google using that email).
+- `/college` (signed in) and `/admin`: the counsellors' dashboard, moved out of the app. Staff sign in with Google (Google
+  Identity Services); the MAX server checks the ID token and issues its own session (kept in localStorage). All
+  data comes from the MAX server's existing routes (`/api/college`, `/api/college/dashboard`, `/api/college/admin`).
+- Old URLs redirect (`next.config.ts`); `public/sw.js` removes the old app's caching service worker.
 
-Everything through brief 015 is merged. There is no open brief. The remaining
-work is two owner decisions, listed at the bottom.
+## Traps
 
-## What was just repaired, and why it must not be undone
-
-An audit found the app broadly built but broken in ways that unit tests could
-not see. Each of these is now covered by a test — if you find yourself
-"simplifying" one of them, read the test first.
-
-| What was wrong | Why it matters |
-| --- | --- |
-| The chat route read `lastUserMessage.content` | `useChat` posts UI messages whose text is in `parts`. `content` was always `undefined`, so **the crisis classifier ran on an empty string for every real browser user.** Curl tests passed the whole time because a hand-written request uses the model-message shape |
-| Crisis was a 400 the client string-matched | The match never landed, so a student in crisis saw no reply and no helpline card. It is now a `data-crisis` part on a normal stream |
-| The stream had no `start`/`finish` framing | `useChat` never opened an assistant message, so replies never rendered |
-| The app layout had no navigation | Every feature except chat was unreachable |
-| The Groq model id was deprecated | Every chat request 404'd and surfaced as an empty 200 |
-| `account` was missing `issuer` | Better Auth 1.7 needs it; sign-up created a user that could never authenticate |
-| The output guard ran in `onFinish` | It recorded violations after the reply had already reached the browser |
-| The classifier was English-only | Hindi and Hinglish crisis phrasing scored `none` |
-
-## Traps that will bite you
-
-- **`useChat` sends `parts`, not `content`.** Any change to `src/app/api/chat/route.ts`
-  must keep the parts-aware text read and `convertToModelMessages`.
-- **Never call an LLM outside `src/ai/`, and never skip `src/safety/`.**
-  The golden set in `src/safety/__tests__/golden.json` has 84 cases including
-  Hinglish and Devanagari. A regression there fails CI, and should.
-- **Colour values live only in `globals.css` and `src/app/theme-colors.ts`.**
-  No hex, no `bg-[#...]`, no raw Tailwind palette (`red-500`, `green-600`).
-- **The build no longer pushes schema.** Run `npm run db:migrate` deliberately
-  after a schema change. Neon's free tier has no automatic backups.
-- **The interface is English only.** Do not add an i18n framework. The Hindi and
-  Hinglish patterns in the classifier are about what students *type*, and stay.
-- **Signing up per test trips Better Auth's rate limiter.** The e2e suite shares
-  one account created by `e2e/auth.setup.ts`. Keep it that way.
-
-## How to verify your change
-
-```bash
-npm run check
-```
-
-Runs repo hygiene, lint, typecheck, 112 unit tests, and the JS budget when a
-build is present. Paste the real exit code — never a summary of it.
-
-For anything with a UI:
-
-```bash
-npx playwright test
-```
-
-Nine tests against the deployed app. Deployment Protection is off, so no secret
-is needed. If it is ever turned back on, set `VERCEL_AUTOMATION_BYPASS_SECRET`
-from the Vercel project settings — the config picks it up, and it must never be
-committed. Add a case for any screen you change.
-
-## What is left
-
-Neither is a coding task; both are the owner's call.
-
-- **TODO-003** — the campus dashboard needs ten real students checking in before
-  it shows anything, because of the minimum-cohort rule. Recruit during Phase 05,
-  not the week before the viva.
-- **TODO-004** — the git history before 2026-08-30 was fabricated by a script
-  that squashed one commit into fifteen backdated ones. The script is deleted;
-  the commits remain. Keep, rewrite or disclose — the owner decides.
-
-Two leftover test accounts (`validate-test@example.com`,
-`max-verify-…@example.com`) sit in the database. They were created through the
-API with email addresses, so the username-based UI cannot delete them. Harmless.
+- The MAX server is EAS Hosting, which **replaces the browser's Origin header** with its own host, so CORS can't be
+  limited by origin there; the college routes allow any origin and accept only bearer tokens (see
+  `max-app/src/server/cors.ts`).
+- Google sign-in on this site needs its address in the web OAuth client's **Authorized JavaScript origins**
+  (Google Cloud console, owner).
+- Deploy: `vercel --prod` (Vercel CLI, logged in as the project owner), with `NEXT_PUBLIC_GOOGLE_CLIENT_ID` set.

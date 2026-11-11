@@ -1,163 +1,100 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
+/* MAX's sketchbook palette, the same tokens as the app (max-app/src/lib/theme.ts): black ink on warm paper.
+   Help red is the only alarm colour; the soft tints sit behind pictures, never behind text. */
 @theme {
-  /* Surface */
-  --color-surface: #faf8f5;          /* warm off-white paper */
-  --color-surface-card: #f3efe9;     /* deeper warm tone for cards */
+  --color-paper: #fcf8ee;
+  --color-raised: #fffdf7;
+  --color-ink: #1a1816;
+  --color-ink2: #4a4540;
+  --color-ink3: #6e6761;
+  --color-rule: #8a8379;
+  --color-hair: #b8b0a3;
+  --color-help: #b3261e;
+  --color-tint-exam: #f8e7c4;
+  --color-tint-sleep: #e3e4f3;
+  --color-tint-calm: #dcefe8;
+  --color-tint-thoughts: #ece3f3;
+  --color-tint-kind: #f7e1e1;
+  --color-tint-focus: #ddebf5;
 
-  /* Ink */
-  --color-ink: #2c2926;              /* soft near-black, warm cast */
-  --color-ink-muted: #6b6560;        /* secondary text */
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-head), system-ui, sans-serif;
+  --font-hand: var(--font-kalam), cursive;
 
-  /* Accents — one per condition */
-  --color-clay: #d4a59a;             /* anxiety */
-  --color-sage: #a8b5a0;             /* depression */
-  --color-sand: #cdb891;             /* burnout */
-  --color-sky: #9abbc7;              /* sleep */
-  --color-dusk: #b0a1c1;             /* academic stress */
-
-  /* Signal — urgent help, findable but not alarming */
-  --color-signal: #c27650;           /* warm amber-terracotta */
-
-  /* Success — a step finished. Muted so it congratulates without shouting. */
-  --color-success: #6f8265;          /* deeper sage, readable on surface */
-
-  /* Radii */
-  --radius-sm: 0.5rem;
-  --radius-lg: 1rem;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.06);
-  --shadow-lg: 0 4px 12px oklch(0 0 0 / 0.08);
-
-  /* Font */
-  --font-display: "Outfit", system-ui, sans-serif;
+  --radius-box: 12px;
 }
 
-@theme inline {
-  --font-heading: var(--font-sans);
-  --font-sans: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+html {
+  background: var(--color-paper);
 }
 
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+body {
+  position: relative;
+  isolation: isolate;
+  color: var(--color-ink);
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+/* the paper grain at 4%, like the app's (grainOpacity); a full-strength grain is just noise */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("/paper-grain.png");
+  background-size: 320px;
+  opacity: 0.04;
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
+::selection {
+  background: var(--color-tint-exam);
+}
+
+/* keyboard focus is always visible */
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .float {
+    animation: float 4s ease-in-out infinite;
   }
-  body {
-    @apply bg-background text-foreground;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
   }
-  html {
-    @apply font-sans;
+}
+
+/* the hero MAX waves only while hovered; the arm rests by its side otherwise */
+.max-wave svg { width: 100%; height: auto; display: block; }
+.max-wave .max-arm { transform-box: view-box; transform-origin: 161.9px 101px; transition: transform 0.35s cubic-bezier(0.3, 0, 0.2, 1); }
+.max-wave .max-arm-up { opacity: 0; }
+.hero-max:hover .max-wave .max-arm { transform: rotate(-60deg); }
+.hero-max:hover .max-wave .max-arm-up { opacity: 1; }
+.hero-max:hover .max-wave .max-arm-rest { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-max:hover .max-wave .max-arm { animation: max-wave 1.2s 0.35s ease-in-out infinite; }
+  @keyframes max-wave {
+    0%, 100% { transform: rotate(-60deg); }
+    50% { transform: rotate(-42deg); }
   }
+}
+
+/* a button (or a row of them) that follows text, a list or a field gets room above it, everywhere on the site */
+:where(p, ul, ol, dl, h1, h2, h3, input, label, .grid) + :is(.btn, .btn-row) {
+  margin-top: 1.25rem;
+}
+
+/* Meet MAX: a small comic squash when MAX changes mood, and a nudge on hover */
+@media (prefers-reduced-motion: no-preference) {
+  .max-pop { animation: max-pop 0.42s cubic-bezier(0.3, 0, 0.2, 1); transform-origin: 50% 100%; }
+  @keyframes max-pop {
+    0% { transform: scale(1.06, 0.9); }
+    55% { transform: scale(0.98, 1.03); }
+    100% { transform: scale(1, 1); }
+  }
+  .max-poke:hover img { transform: translateY(-4px); transition: transform 0.25s ease-out; }
 }

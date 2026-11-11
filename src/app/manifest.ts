@@ -1,21 +1,15 @@
+import type { MetadataRoute } from "next";
 import { themeColors } from "./theme-colors";
-import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "M.A.X — Mental-health Assistance & eXpert",
-    short_name: "M.A.X",
-    description: "A digital mental health and psychological support system for students in higher education.",
+    name: "MAX, a wellbeing companion for students",
+    short_name: "MAX",
+    description: "A free, private wellbeing companion for college students in India.",
     start_url: "/",
     display: "standalone",
-    background_color: themeColors.surface,
-    theme_color: themeColors.ink,
-    icons: [
-      {
-        src: "/favicon.ico",
-        sizes: "any",
-        type: "image/x-icon",
-      },
-    ],
+    background_color: themeColors.paper,
+    theme_color: themeColors.paper,
+    icons: [{ src: "/max.png", sizes: "400x400", type: "image/png" }],
   };
 }
