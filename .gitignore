@@ -25,3 +25,4 @@ e2e/.auth/
 
 # APKs are deployed with the site but never committed (40 MB each)
 /public/downloads/*.apk
+*.tsbuildinfo

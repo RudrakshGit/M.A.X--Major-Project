@@ -1,30 +1,33 @@
-# MAX website — agent operating guide
+# MAX website — agent guide
 
-The public website for MAX (major project E-G18): a landing page, the Android download, helplines, and the
-college counsellors' dashboard. The student app itself is a separate Expo project (`../max-app`); its web build is
-"Try now" at https://max-companion.expo.app. Read `HANDOFF.md` first.
+The public site for MAX: landing, features, demo, download, helplines and the college counsellors' dashboard. The
+student app is a separate Expo project (`../max-app`, repo MAX-mobile). Read `README.md` first.
 
 ## Map
 
-- `src/app/` pages: `/` landing, `/try` (the demo), `/download`, `/help`, `/college` (dashboard), `/admin`.
-- `src/components/` shared UI (`Sketch` outlines, plain buttons), `college/` dashboard client components.
-- `src/lib/max-api.ts` the only code that talks to the MAX server (college and auth routes).
-- `src/content/` the app version and APK details (`app.ts`), helplines (`referrals.ts`, same list as the app).
+- `src/app/` pages · `src/components/` UI (`Sketch` outlines, plain buttons) and `college/` dashboard
+- `src/lib/max-api.ts` is the only code that talks to the MAX server
+- `src/content/app.ts` APK version and file · `src/content/referrals.ts` helplines (same as the app)
 
-## Invariants
+## Rules
 
-- **The dashboard never sees one student.** It only shows what the server returns (10+ students, blurred).
-- **No accounts for students on this site.** Students use the app or "Try now"; only staff sign in, with Google.
-- **Helplines need no sign-in** and match the app's Help screen.
-- **No secrets in the repo.** The Google client id comes from `NEXT_PUBLIC_GOOGLE_CLIENT_ID`.
-- **Look like the app:** its tokens in `globals.css`; only card outlines are sketched, buttons are plain.
+- The dashboard never shows one student: it only renders what the server returns (10+ students, blurred).
+- No student accounts here. Only college staff sign in, with Google; registering needs no sign-in.
+- Helplines need no sign-in and match the app's Help screen.
+- Look like the app: tokens in `globals.css`; only card outlines are sketched, buttons stay plain; keep sections simple.
+- No secrets in the repo; the Google client id comes from `NEXT_PUBLIC_GOOGLE_CLIENT_ID`.
 - No AI attribution in commits or PRs.
+
+## Traps
+
+- EAS Hosting replaces the browser's Origin header, so the MAX server allows any origin on the college routes and
+  accepts only bearer tokens (`max-app/src/server/cors.ts`).
+- After `vercel deploy --prod`, run `vercel alias set <deployment> max-mental-health-expert.vercel.app`.
 
 ## Check
 
 ```bash
-npm run check   # lint + typecheck + repo hygiene
-npm run build
+npm run check && npm run build
 ```
 
 <!-- BEGIN:nextjs-agent-rules -->

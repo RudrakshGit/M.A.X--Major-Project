@@ -1,4 +1,4 @@
-// Proportional validation. Repo hygiene always; app checks once src/ exists.
+// Site checks: repo hygiene, then lint and typecheck, then the first-load JS budget after a build.
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { resolve, join } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -7,26 +7,11 @@ const root = resolve(import.meta.dirname, "..");
 const failures = [];
 const fail = (message) => failures.push(message);
 
-// 1. Project state parses.
-try {
-  const state = JSON.parse(readFileSync(resolve(root, "project/state.json"), "utf8"));
-  const active = state.phases.filter((phase) => phase.status === "active");
-  if (active.length > 1) fail(`More than one active phase: ${active.map((p) => p.id).join(", ")}`);
-} catch (error) {
-  fail(`project/state.json is not valid JSON: ${error.message}`);
-}
-
-// 2. Root guidance stays small enough for a small model.
+// 1. Root guidance stays short.
 const agentLines = readFileSync(resolve(root, "AGENTS.md"), "utf8").trim().split("\n").length;
 if (agentLines > 60) fail(`AGENTS.md is ${agentLines} lines; budget is 60`);
 
-// 3. Every docs/index.md link resolves.
-const index = readFileSync(resolve(root, "docs/index.md"), "utf8");
-for (const [, target] of index.matchAll(/\]\((?!https?:)([^)#]+)/g)) {
-  if (!existsSync(resolve(root, "docs", target))) fail(`docs/index.md links to missing ${target}`);
-}
-
-// 4. .env.example carries names, never values.
+// 2. .env.example carries names, never values.
 const envExample = resolve(root, ".env.example");
 if (existsSync(envExample)) {
   for (const line of readFileSync(envExample, "utf8").split("\n")) {
@@ -37,7 +22,7 @@ if (existsSync(envExample)) {
   }
 }
 
-// 5. No secret-shaped strings in tracked source.
+// 2b. No secret-shaped strings in tracked source.
 const secretPattern = /(sk-[A-Za-z0-9]{16,}|gsk_[A-Za-z0-9]{16,}|AIza[A-Za-z0-9_-]{20,})/;
 const skip = new Set(["node_modules", ".git", ".next", "logs", "evidence", "artifacts"]);
 const walk = (dir) => {
@@ -52,7 +37,7 @@ const walk = (dir) => {
 };
 walk(root);
 
-// 6. App checks, once the app exists.
+// 2c. Lint and typecheck, once the app exists.
 if (existsSync(resolve(root, "src"))) {
   for (const script of ["lint", "typecheck"]) {
     const result = spawnSync("npm", ["run", "--silent", script], { cwd: root, stdio: "inherit" });
@@ -61,7 +46,7 @@ if (existsSync(resolve(root, "src"))) {
 }
 
 
-// 7. First-load JS budget. Only meaningful after a build; see docs/performance.md.
+// 3. First-load JS budget (a budget Android phone on 4G). Only meaningful after a build.
 const manifestPath = resolve(root, ".next/build-manifest.json");
 if (existsSync(manifestPath)) {
   const { gzipSync } = await import("node:zlib");
@@ -76,7 +61,7 @@ if (existsSync(manifestPath)) {
   };
 
   // Polyfills are served only to legacy browsers through the nomodule path, so a
-  // current Android Chrome — the device docs/performance.md targets — never
+  // current Android Chrome never
   // downloads them. Reported for visibility, deliberately outside the budget.
   const main = gzipped(manifest.rootMainFiles);
   const polyfills = gzipped(manifest.polyfillFiles);

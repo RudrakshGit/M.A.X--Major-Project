@@ -1,4 +1,4 @@
-// The MAX app this site points to. Update with each APK release (max-app/docs/README.md has the latest build).
+// The MAX app this site points to. Update with each APK release (the APKs are in Major_Project/apk/).
 export const TRY_URL = "https://max-companion.expo.app";
 export const APK = {
   version: "1.8.4",
